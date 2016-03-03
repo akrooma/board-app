@@ -1,0 +1,34 @@
+﻿@model Domain.RidingStyle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RidingStyle</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RidingStyleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RidingStyleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RidingStyleComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RidingStyleComment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RidingStyleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

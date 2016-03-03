@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Domain.RouteInEvent>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Route.RouteName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RouteInEventComment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.RouteName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RouteInEventComment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.RouteInEventId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RouteInEventId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RouteInEventId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model Domain.Board
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Board</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeckStyle.DeckStyleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeckStyle.DeckStyleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RidingStyle.RidingStyleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RidingStyle.RidingStyleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BoardId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

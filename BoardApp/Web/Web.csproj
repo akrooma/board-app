@@ -197,8 +197,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BoardsController.cs" />
+    <Compile Include="Controllers\DeckStylesController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MapPointsController.cs" />
+    <Compile Include="Controllers\RidingStylesController.cs" />
+    <Compile Include="Controllers\RouteAndCharacteristicsController.cs" />
+    <Compile Include="Controllers\RouteCharacteristicsController.cs" />
+    <Compile Include="Controllers\RouteCommentsController.cs" />
+    <Compile Include="Controllers\RouteInEventsController.cs" />
+    <Compile Include="Controllers\RoutesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -271,6 +281,56 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Boards\Create.cshtml" />
+    <Content Include="Views\Boards\Delete.cshtml" />
+    <Content Include="Views\Boards\Details.cshtml" />
+    <Content Include="Views\Boards\Edit.cshtml" />
+    <Content Include="Views\Boards\Index.cshtml" />
+    <Content Include="Views\DeckStyles\Create.cshtml" />
+    <Content Include="Views\DeckStyles\Delete.cshtml" />
+    <Content Include="Views\DeckStyles\Details.cshtml" />
+    <Content Include="Views\DeckStyles\Edit.cshtml" />
+    <Content Include="Views\DeckStyles\Index.cshtml" />
+    <Content Include="Views\RidingStyles\Create.cshtml" />
+    <Content Include="Views\RidingStyles\Delete.cshtml" />
+    <Content Include="Views\RidingStyles\Details.cshtml" />
+    <Content Include="Views\RidingStyles\Edit.cshtml" />
+    <Content Include="Views\RidingStyles\Index.cshtml" />
+    <Content Include="Views\MapPoints\Create.cshtml" />
+    <Content Include="Views\MapPoints\Delete.cshtml" />
+    <Content Include="Views\MapPoints\Details.cshtml" />
+    <Content Include="Views\MapPoints\Edit.cshtml" />
+    <Content Include="Views\MapPoints\Index.cshtml" />
+    <Content Include="Views\Routes\Create.cshtml" />
+    <Content Include="Views\Routes\Delete.cshtml" />
+    <Content Include="Views\Routes\Details.cshtml" />
+    <Content Include="Views\Routes\Edit.cshtml" />
+    <Content Include="Views\Routes\Index.cshtml" />
+    <Content Include="Views\RouteComments\Create.cshtml" />
+    <Content Include="Views\RouteComments\Delete.cshtml" />
+    <Content Include="Views\RouteComments\Details.cshtml" />
+    <Content Include="Views\RouteComments\Edit.cshtml" />
+    <Content Include="Views\RouteComments\Index.cshtml" />
+    <Content Include="Views\RouteCharacteristics\Create.cshtml" />
+    <Content Include="Views\RouteCharacteristics\Delete.cshtml" />
+    <Content Include="Views\RouteCharacteristics\Details.cshtml" />
+    <Content Include="Views\RouteCharacteristics\Edit.cshtml" />
+    <Content Include="Views\RouteCharacteristics\Index.cshtml" />
+    <Content Include="Views\RouteAndCharacteristics\Create.cshtml" />
+    <Content Include="Views\RouteAndCharacteristics\Delete.cshtml" />
+    <Content Include="Views\RouteAndCharacteristics\Details.cshtml" />
+    <Content Include="Views\RouteAndCharacteristics\Edit.cshtml" />
+    <Content Include="Views\RouteAndCharacteristics\Index.cshtml" />
+    <Content Include="Views\RouteInEvents\Create.cshtml" />
+    <Content Include="Views\RouteInEvents\Delete.cshtml" />
+    <Content Include="Views\RouteInEvents\Details.cshtml" />
+    <Content Include="Views\RouteInEvents\Edit.cshtml" />
+    <Content Include="Views\RouteInEvents\Index.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,6 +347,16 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-2.2.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{dd4e93f3-3d7f-493c-bbf7-df674119686c}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{818f47a0-8000-48f4-b523-78c6636e967d}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
