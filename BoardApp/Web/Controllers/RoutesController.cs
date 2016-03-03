@@ -7,18 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
+using DAL.Repositories;
 using Domain;
 
 namespace Web.Controllers
 {
     public class RoutesController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
+
+        private readonly IRouteRepository _routeRepository = new RouteRepository(new DataBaseContext());
 
         // GET: Routes
         public ActionResult Index()
         {
-            return View(db.Routes.ToList());
+            return View(_routeRepository.All);
         }
 
         // GET: Routes/Details/5
@@ -28,7 +32,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Route route = db.Routes.Find(id);
+            Route route = _routeRepository.GetById(id);
             if (route == null)
             {
                 return HttpNotFound();
@@ -51,8 +55,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Routes.Add(route);
-                db.SaveChanges();
+                _routeRepository.Add(route);
+                _routeRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +70,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Route route = db.Routes.Find(id);
+            Route route = _routeRepository.GetById(id);
             if (route == null)
             {
                 return HttpNotFound();
@@ -83,8 +87,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(route).State = EntityState.Modified;
-                db.SaveChanges();
+                _routeRepository.Update(route);
+                _routeRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(route);
@@ -97,7 +101,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Route route = db.Routes.Find(id);
+            Route route = _routeRepository.GetById(id);
             if (route == null)
             {
                 return HttpNotFound();
@@ -110,9 +114,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Route route = db.Routes.Find(id);
-            db.Routes.Remove(route);
-            db.SaveChanges();
+            _routeRepository.Delete(id);
+            _routeRepository.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +123,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _routeRepository.Dispose();
             }
             base.Dispose(disposing);
         }

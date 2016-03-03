@@ -7,19 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
+using DAL.Repositories;
 using Domain;
 
 namespace Web.Controllers
 {
     public class MapPointsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
+
+        private readonly IMapPointRepository _mapPointRepository = new MapPointRepository(new DataBaseContext());
 
         // GET: MapPoints
         public ActionResult Index()
         {
-            var mapPoints = db.MapPoints.Include(m => m.Route);
-            return View(mapPoints.ToList());
+            return View(_mapPointRepository.All);
         }
 
         // GET: MapPoints/Details/5
@@ -29,7 +32,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = db.MapPoints.Find(id);
+            MapPoint mapPoint = _mapPointRepository.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
@@ -40,7 +43,7 @@ namespace Web.Controllers
         // GET: MapPoints/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName");
+            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName");
             return View();
         }
 
@@ -53,12 +56,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MapPoints.Add(mapPoint);
-                db.SaveChanges();
+                _mapPointRepository.Add(mapPoint);
+                _mapPointRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -69,12 +72,12 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = db.MapPoints.Find(id);
+            MapPoint mapPoint = _mapPointRepository.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -87,11 +90,11 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(mapPoint).State = EntityState.Modified;
-                db.SaveChanges();
+                _mapPointRepository.Update(mapPoint);
+                _mapPointRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -102,7 +105,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = db.MapPoints.Find(id);
+            MapPoint mapPoint = _mapPointRepository.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
@@ -115,9 +118,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MapPoint mapPoint = db.MapPoints.Find(id);
-            db.MapPoints.Remove(mapPoint);
-            db.SaveChanges();
+            _mapPointRepository.Delete(id);
+            _mapPointRepository.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +127,8 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _mapPointRepository.Dispose();
+                //db.Dispose();
             }
             base.Dispose(disposing);
         }
