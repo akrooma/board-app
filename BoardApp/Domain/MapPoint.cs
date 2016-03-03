@@ -14,5 +14,8 @@ namespace Domain
 
         public int RouteId { get; set; }
         public virtual Route Route { get; set; }
+
+        public int CreatorId { get; set; }
+        public UserAccount Creator { get; set; }
     }
 }
