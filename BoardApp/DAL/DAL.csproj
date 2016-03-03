@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext.cs" />
+    <Compile Include="Migrations\201603032052188_InitialMigration.cs" />
+    <Compile Include="Migrations\201603032052188_InitialMigration.Designer.cs">
+      <DependentUpon>201603032052188_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DbMigrationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +66,11 @@
       <Project>{818F47A0-8000-48F4-B523-78C6636E967D}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603032052188_InitialMigration.resx">
+      <DependentUpon>201603032052188_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

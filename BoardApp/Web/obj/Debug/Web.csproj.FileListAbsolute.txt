@@ -95,3 +95,7 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Microsoft.Owin.Security.Micro
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\obj\Debug\Web.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\obj\Debug\Web.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\DAL.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Domain.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\DAL.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Domain.pdb

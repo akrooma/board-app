@@ -23,6 +23,7 @@ namespace Domain
         public virtual List<RouteComment> Comments { get; set; } = new List<RouteComment>(); 
         public virtual List<RouteInEvent> Events { get; set; } = new List<RouteInEvent>(); 
 
+        //public int UserAccountId { get; set; }
         public int CreatorId { get; set; }
         public UserAccount Creator { get; set; }
     }

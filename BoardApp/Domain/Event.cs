@@ -22,6 +22,7 @@ namespace Domain
 
         public virtual List<RouteInEvent> Routes { get; set; } = new List<RouteInEvent>(); 
 
+        //public int UserAccountId { get; set; }
         public UserAccount EventCreator { get; set; }
         // Invite list
 

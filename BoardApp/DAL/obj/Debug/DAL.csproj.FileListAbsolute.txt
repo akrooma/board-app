@@ -10,3 +10,5 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\bin\Debug\EntityFramework.SqlServ
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\obj\Debug\DAL.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\obj\Debug\DAL.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\obj\Debug\DAL.Migrations.InitialMigration.resources
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\DAL\obj\Debug\DAL.csproj.GenerateResource.Cache
