@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class RouteRepository : EFRepository<Route>, IRouteRepository
     {
-        public RouteRepository(DbContext dbContext) : base(dbContext)
+        public RouteRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

@@ -17,7 +17,13 @@ namespace Web.Controllers
     {
         //private DataBaseContext db = new DataBaseContext();
 
-        private readonly IRouteRepository _routeRepository = new RouteRepository(new DataBaseContext());
+        //private readonly IRouteRepository _routeRepository = new RouteRepository(new DataBaseContext());
+        private readonly IRouteRepository _routeRepository;
+
+        public RoutesController(IRouteRepository routeRepository)
+        {
+            _routeRepository = routeRepository;
+        }
 
         // GET: Routes
         public ActionResult Index()

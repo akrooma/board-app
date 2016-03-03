@@ -22,7 +22,7 @@ namespace DAL.Repositories
         protected DbSet<T> DbSet { get; set; }
 
         //Constructor, requires dbContext as dependency
-        public EFRepository(DbContext dbContext)
+        public EFRepository(IDbContext dbContext)
         {
             if (dbContext == null)
                 throw new ArgumentNullException(nameof(dbContext));

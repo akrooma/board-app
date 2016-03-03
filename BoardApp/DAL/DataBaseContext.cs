@@ -7,10 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Migrations;
 using Domain;
+using DAL.Interfaces;
 
 namespace DAL
 {
-    public class DataBaseContext : DbContext
+    public class DataBaseContext : DbContext, IDbContext
     {
         public DataBaseContext() : base("name=BoardAppDbConnection")
         {

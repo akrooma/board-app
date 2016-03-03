@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class MapPointRepository : EFRepository<MapPoint>, IMapPointRepository
     {
-        public MapPointRepository(DbContext dbContext) : base(dbContext)
+        public MapPointRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

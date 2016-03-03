@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class RidingStyleRepository : EFRepository<RidingStyle>, IRidingStyleRepository
     {
-        public RidingStyleRepository(DbContext dbContext) : base(dbContext)
+        public RidingStyleRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

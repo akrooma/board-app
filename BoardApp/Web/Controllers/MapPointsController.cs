@@ -17,7 +17,13 @@ namespace Web.Controllers
     {
         //private DataBaseContext db = new DataBaseContext();
 
-        private readonly IMapPointRepository _mapPointRepository = new MapPointRepository(new DataBaseContext());
+        //private readonly IMapPointRepository _mapPointRepository = new MapPointRepository(new DataBaseContext());
+        private readonly IMapPointRepository _mapPointRepository;
+
+        public MapPointsController(IMapPointRepository mapPointRepository)
+        {
+            _mapPointRepository = mapPointRepository;
+        }
 
         // GET: MapPoints
         public ActionResult Index()

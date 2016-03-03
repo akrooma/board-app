@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class RouteCommentRepository : EFRepository<RouteComment>, IRouteCommentRepository
     {
-        public RouteCommentRepository(DbContext dbContext) : base(dbContext)
+        public RouteCommentRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

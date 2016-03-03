@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class EventRepository : EFRepository<Event>, IEventRepository
     {
-        public EventRepository(DbContext dbContext) : base(dbContext)
+        public EventRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

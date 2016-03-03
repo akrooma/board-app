@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class DeckStyleRepository : EFRepository<DeckStyle>, IDeckStyleRepository
     {
-        public DeckStyleRepository(DbContext dbContext) : base(dbContext)
+        public DeckStyleRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

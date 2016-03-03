@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class BoardRepository : EFRepository<Board>, IBoardRepository
     {
-        public BoardRepository(DbContext dbContext) : base(dbContext)
+        public BoardRepository(IDbContext dbContext) : base(dbContext)
         {
 
         }

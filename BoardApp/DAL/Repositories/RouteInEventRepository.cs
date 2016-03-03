@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class RouteInEventRepository : EFRepository<RouteInEvent>, IRouteInEventRepository
     {
-        public RouteInEventRepository(DbContext dbContext) : base(dbContext)
+        public RouteInEventRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }

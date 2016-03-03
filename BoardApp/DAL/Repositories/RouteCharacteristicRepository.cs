@@ -11,7 +11,7 @@ namespace DAL.Repositories
 {
     public class RouteCharacteristicRepository : EFRepository<RouteCharacteristic>, IRouteCharacteristicRepository
     {
-        public RouteCharacteristicRepository(DbContext dbContext) : base(dbContext)
+        public RouteCharacteristicRepository(IDbContext dbContext) : base(dbContext)
         {
         }
     }
