@@ -10,8 +10,10 @@ namespace Domain
     {
         public int RouteId { get; set; }
         public string RouteName { get; set; }
-        public string RouteDescription { get; set; }
+        public string Description { get; set; }
+        public int Rating { get; set; }
 
-        public virtual List<MapPoint> MapPoints { get; set; } 
+        public virtual List<MapPoint> MapPoints { get; set; } = new List<MapPoint>();
+        public virtual List<RouteAndCharacteristic> Characteristics { get; set; } = new List<RouteAndCharacteristic>();
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class Event
+    public class Event
     {
+
     }
 }
