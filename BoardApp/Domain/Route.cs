@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Domain
         public virtual List<RouteInEvent> Events { get; set; } = new List<RouteInEvent>(); 
 
         //public int UserAccountId { get; set; }
+        [ForeignKey("Creator")]
         public int CreatorId { get; set; }
         public UserAccount Creator { get; set; }
     }

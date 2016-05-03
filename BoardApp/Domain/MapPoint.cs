@@ -9,8 +9,8 @@ namespace Domain
     public class MapPoint
     {
         public int MapPointId { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
 
         public int RouteId { get; set; }
         public virtual Route Route { get; set; }

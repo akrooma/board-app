@@ -50,12 +50,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext.cs" />
+    <Compile Include="Interfaces\IBoardRepository.cs" />
+    <Compile Include="Interfaces\IDbContext.cs" />
+    <Compile Include="Interfaces\IDeckStyleRepository.cs" />
+    <Compile Include="Interfaces\IEFRepository.cs" />
+    <Compile Include="Interfaces\IEventRepository.cs" />
+    <Compile Include="Interfaces\IMapPointRepository.cs" />
+    <Compile Include="Interfaces\IRidingStyleRepository.cs" />
+    <Compile Include="Interfaces\IRouteAndCharacteristicRepository.cs" />
+    <Compile Include="Interfaces\IRouteCharacteristicRepository.cs" />
+    <Compile Include="Interfaces\IRouteCommentRepository.cs" />
+    <Compile Include="Interfaces\IRouteInEventRepository.cs" />
+    <Compile Include="Interfaces\IRouteRepository.cs" />
     <Compile Include="Migrations\201603032052188_InitialMigration.cs" />
     <Compile Include="Migrations\201603032052188_InitialMigration.Designer.cs">
       <DependentUpon>201603032052188_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DbMigrationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BoardRepository.cs" />
+    <Compile Include="Repositories\DeckStyleRepository.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\MapPointRepository.cs" />
+    <Compile Include="Repositories\RidingStyleRepository.cs" />
+    <Compile Include="Repositories\RouteAndCharacteristicRepository.cs" />
+    <Compile Include="Repositories\RouteCharacteristicRepository.cs" />
+    <Compile Include="Repositories\RouteCommentRepository.cs" />
+    <Compile Include="Repositories\RouteInEventRepository.cs" />
+    <Compile Include="Repositories\RouteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

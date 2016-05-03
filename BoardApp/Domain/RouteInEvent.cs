@@ -15,9 +15,11 @@ namespace Domain
         public string RouteInEventComment { get; set; }
         
         public int RouteId { get; set; }
-        public Route Route { get; set; }
+        public virtual Route Route { get; set; }
 
         public int EventId { get; set; }
-        public Event Event { get; set; }
+        public virtual Event Event { get; set; }
+
+        // Kas route läbitakse eventi ajal üks kord või ei?
     }
 }

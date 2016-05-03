@@ -25,5 +25,7 @@ namespace Domain
 
         public int DeckStyleId { get; set; }
         public DeckStyle DeckStyle { get; set; }
+
+        // universaalsemaks.
     }
 }

@@ -63,10 +63,11 @@
     <Compile Include="RouteAndCharacteristic.cs" />
     <Compile Include="RouteComment.cs" />
     <Compile Include="RouteInEvent.cs" />
+    <Compile Include="TransportItem.cs" />
+    <Compile Include="TransportItemType.cs" />
+    <Compile Include="TransportItemTypeAttribute.cs" />
+    <Compile Include="TransportItemTypeAttributeValue.cs" />
     <Compile Include="UserAccount.cs" />
-    <Compile Include="UserGroup.cs" />
-    <Compile Include="UserGroupAdmin.cs" />
-    <Compile Include="UserInUserGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
