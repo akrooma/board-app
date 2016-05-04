@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using DAL;
+using DAL.Helpers;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -64,6 +65,8 @@ namespace Web
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IDbContext>().To<DataBaseContext>().InRequestScope();
+
+            /*
             kernel.Bind<IMapPointRepository>().To<MapPointRepository>().InRequestScope();
             kernel.Bind<IRouteRepository>().To<RouteRepository>().InRequestScope();
             kernel.Bind<IEventRepository>().To<EventRepository>().InRequestScope();
@@ -72,12 +75,15 @@ namespace Web
             kernel.Bind<IRouteCommentRepository>().To<RouteCommentRepository>().InRequestScope();
             kernel.Bind<IRouteInEventRepository>().To<RouteInEventRepository>().InRequestScope();
 
-            
             kernel.Bind<ITransportItemRepository>().To<TransportItemRepository>().InRequestScope();
             kernel.Bind<ITransportItemTypeRepository>().To<TransportItemTypeRepository>().InRequestScope();
             kernel.Bind<ITransportItemTypeAttributeRepository>().To<TransportItemTypeAttributeRepository>().InRequestScope();
             kernel.Bind<ITransportItemTypeAttributeValueRepository>().To<TransportItemTypeAttributeValueRepository>().InRequestScope();
-            
+            */
+
+            kernel.Bind<EFRepositoryFactories>().To<EFRepositoryFactories>().InSingletonScope();
+            kernel.Bind<IEFRepositoryProvider>().To<EFRepositoryProvider>().InRequestScope();
+            kernel.Bind<IUOW>().To<UOW>().InRequestScope();
         }        
     }
 }
