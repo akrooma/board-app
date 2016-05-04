@@ -1,0 +1,9 @@
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\ConsoleTestApp.exe.config
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\ConsoleTestApp.exe
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\ConsoleTestApp.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramework.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramework.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\obj\Debug\ConsoleTestApp.exe
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\obj\Debug\ConsoleTestApp.pdb

@@ -19,7 +19,5 @@ namespace Domain
 
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
-
-        // Kas route läbitakse eventi ajal üks kord või ei?
     }
 }

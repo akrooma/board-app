@@ -66,6 +66,18 @@ namespace Web
             kernel.Bind<IDbContext>().To<DataBaseContext>().InRequestScope();
             kernel.Bind<IMapPointRepository>().To<MapPointRepository>().InRequestScope();
             kernel.Bind<IRouteRepository>().To<RouteRepository>().InRequestScope();
+            kernel.Bind<IEventRepository>().To<EventRepository>().InRequestScope();
+            kernel.Bind<IRouteAndCharacteristicRepository>().To<RouteAndCharacteristicRepository>().InRequestScope();
+            kernel.Bind<IRouteCharacteristicRepository>().To<RouteCharacteristicRepository>().InRequestScope();
+            kernel.Bind<IRouteCommentRepository>().To<RouteCommentRepository>().InRequestScope();
+            kernel.Bind<IRouteInEventRepository>().To<RouteInEventRepository>().InRequestScope();
+
+            
+            kernel.Bind<ITransportItemRepository>().To<TransportItemRepository>().InRequestScope();
+            kernel.Bind<ITransportItemTypeRepository>().To<TransportItemTypeRepository>().InRequestScope();
+            kernel.Bind<ITransportItemTypeAttributeRepository>().To<TransportItemTypeAttributeRepository>().InRequestScope();
+            kernel.Bind<ITransportItemTypeAttributeValueRepository>().To<TransportItemTypeAttributeValueRepository>().InRequestScope();
+            
         }        
     }
 }

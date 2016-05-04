@@ -12,18 +12,21 @@ namespace Domain
     {
         public int TransportItemId { get; set; }
 
-        [StringLength(50, ErrorMessage = "Name's length must be 1 to 50 characters long.", MinimumLength = 1)]
-        public string TransportItemName { get; set; }
+        [MinLength(1)]
+        [MaxLength(50)]
+        //[StringLength(50, ErrorMessage = "Name's length must be 1 to 50 characters long.", MinimumLength = 1)]
+        public string Name { get; set; }
 
         [MaxLength(300)]
-        public string TransportItemDescription { get; set; }
+        public string Description { get; set; }
 
         public int TransportItemTypeId { get; set; }
-        public TransportItemType TransportItemType { get; set; }
+        public virtual TransportItemType TransportItemType { get; set; }
 
-
+        /*
         [ForeignKey("Owner")]
         public int OwnerId { get; set; }
         public UserAccount Owner { get; set; }
+        */
     }
 }

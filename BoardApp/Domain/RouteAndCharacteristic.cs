@@ -11,9 +11,9 @@ namespace Domain
         public int RouteAndCharacteristicId { get; set; }
 
         public int RouteId { get; set; }
-        public Route Route { get; set; }
+        public virtual Route Route { get; set; }
 
         public int RouteCharacteristicId { get; set; }
-        public RouteCharacteristic RouteCharacteristic { get; set; }
+        public virtual RouteCharacteristic RouteCharacteristic { get; set; }
     }
 }

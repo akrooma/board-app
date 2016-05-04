@@ -11,12 +11,13 @@ namespace Domain
     {
         public int RouteCharacteristicId { get; set; }
 
-        [MaxLength(20)]
-        public string RouteCharacteristicName { get; set; }
+        [MinLength(1)]
+        [MaxLength(50)]
+        public string Name { get; set; }
 
         [MaxLength(300)]
-        public string RouteCharacteristicComment { get; set; }
+        public string Comment { get; set; }
 
-        public virtual List<RouteAndCharacteristic> Routes { get; set; } 
+        public virtual List<RouteAndCharacteristic> RoutesWithCharacteristic { get; set; } 
     }
 }

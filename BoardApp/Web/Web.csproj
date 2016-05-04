@@ -214,18 +214,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BoardsController.cs" />
-    <Compile Include="Controllers\DeckStylesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MapPointsController.cs" />
-    <Compile Include="Controllers\RidingStylesController.cs" />
     <Compile Include="Controllers\RouteAndCharacteristicsController.cs" />
     <Compile Include="Controllers\RouteCharacteristicsController.cs" />
     <Compile Include="Controllers\RouteCommentsController.cs" />
     <Compile Include="Controllers\RouteInEventsController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\TransportItemsController.cs" />
+    <Compile Include="Controllers\TransportItemTypeAttributesController.cs" />
+    <Compile Include="Controllers\TransportItemTypeAttributeValuesController.cs" />
+    <Compile Include="Controllers\TransportItemTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,21 +299,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Boards\Create.cshtml" />
-    <Content Include="Views\Boards\Delete.cshtml" />
-    <Content Include="Views\Boards\Details.cshtml" />
-    <Content Include="Views\Boards\Edit.cshtml" />
-    <Content Include="Views\Boards\Index.cshtml" />
-    <Content Include="Views\DeckStyles\Create.cshtml" />
-    <Content Include="Views\DeckStyles\Delete.cshtml" />
-    <Content Include="Views\DeckStyles\Details.cshtml" />
-    <Content Include="Views\DeckStyles\Edit.cshtml" />
-    <Content Include="Views\DeckStyles\Index.cshtml" />
-    <Content Include="Views\RidingStyles\Create.cshtml" />
-    <Content Include="Views\RidingStyles\Delete.cshtml" />
-    <Content Include="Views\RidingStyles\Details.cshtml" />
-    <Content Include="Views\RidingStyles\Edit.cshtml" />
-    <Content Include="Views\RidingStyles\Index.cshtml" />
     <Content Include="Views\MapPoints\Create.cshtml" />
     <Content Include="Views\MapPoints\Delete.cshtml" />
     <Content Include="Views\MapPoints\Details.cshtml" />
@@ -348,6 +334,26 @@
     <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\TransportItems\Create.cshtml" />
+    <Content Include="Views\TransportItems\Delete.cshtml" />
+    <Content Include="Views\TransportItems\Details.cshtml" />
+    <Content Include="Views\TransportItems\Edit.cshtml" />
+    <Content Include="Views\TransportItems\Index.cshtml" />
+    <Content Include="Views\TransportItemTypes\Create.cshtml" />
+    <Content Include="Views\TransportItemTypes\Delete.cshtml" />
+    <Content Include="Views\TransportItemTypes\Details.cshtml" />
+    <Content Include="Views\TransportItemTypes\Edit.cshtml" />
+    <Content Include="Views\TransportItemTypes\Index.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributes\Create.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributes\Delete.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributes\Details.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributes\Edit.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributes\Index.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributeValues\Create.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributeValues\Delete.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributeValues\Details.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributeValues\Edit.cshtml" />
+    <Content Include="Views\TransportItemTypeAttributeValues\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

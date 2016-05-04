@@ -5,6 +5,5 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.pdb

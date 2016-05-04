@@ -11,20 +11,23 @@ namespace Domain
     {
         public int EventId { get; set; }
 
+        [MinLength(1)]
         [MaxLength(50)]
-        public string EventName { get; set; }
-        public DateTime EventCreationDate { get; set; }
-        public DateTime EventStartDate { get; set; }
-        public DateTime EventEndDate { get; set; }
+        public string Name { get; set; }
+
+        public DateTime CreationDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [MaxLength(1000)]
-        public string EventDescription { get; set; }
+        public string Description { get; set; }
 
-        public virtual List<RouteInEvent> Routes { get; set; } = new List<RouteInEvent>(); 
+        public virtual List<RouteInEvent> RoutesInEvent { get; set; } = new List<RouteInEvent>(); 
+
+        // Picture?
 
         //public int UserAccountId { get; set; }
-        public UserAccount EventCreator { get; set; }
-        // Invite list
-
+        //public UserAccount EventCreator { get; set; }
+        //Invite list
     }
 }

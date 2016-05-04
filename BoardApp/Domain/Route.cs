@@ -12,21 +12,23 @@ namespace Domain
     {
         public int RouteId { get; set; }
 
+        [MinLength(1)]
         [MaxLength(100)]
-        public string RouteName { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(1000)]
-        public string RouteDescription { get; set; }
-        public int RouteRating { get; set; }
+        public string Description { get; set; }
+        public int Rating { get; set; }
 
         public virtual List<MapPoint> MapPoints { get; set; } = new List<MapPoint>();
         public virtual List<RouteAndCharacteristic> Characteristics { get; set; } = new List<RouteAndCharacteristic>();
         public virtual List<RouteComment> Comments { get; set; } = new List<RouteComment>(); 
-        public virtual List<RouteInEvent> Events { get; set; } = new List<RouteInEvent>(); 
+        public virtual List<RouteInEvent> InEvents { get; set; } = new List<RouteInEvent>(); 
 
-        //public int UserAccountId { get; set; }
+        /*
         [ForeignKey("Creator")]
         public int CreatorId { get; set; }
         public UserAccount Creator { get; set; }
+        */
     }
 }
