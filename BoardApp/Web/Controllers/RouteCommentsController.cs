@@ -7,13 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
 {
     public class RouteCommentsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
+
+        public RouteCommentsController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: RouteComments
         public ActionResult Index()
@@ -29,7 +35,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteComment routeComment = db.RouteComments.Find(id);
+            RouteComment routeComment = _uow.RouteComments.GetById(id);
             if (routeComment == null)
             {
                 return HttpNotFound();
@@ -53,8 +59,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.RouteComments.Add(routeComment);
-                db.SaveChanges();
+                _uow.RouteComments.Add(routeComment);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 

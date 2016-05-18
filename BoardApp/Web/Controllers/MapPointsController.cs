@@ -15,20 +15,17 @@ namespace Web.Controllers
 {
     public class MapPointsController : Controller
     {
-        //private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
 
-        //private readonly IMapPointRepository _mapPointRepository = new MapPointRepository(new DataBaseContext());
-        private readonly IMapPointRepository _mapPointRepository;
-
-        public MapPointsController(IMapPointRepository mapPointRepository)
+        public MapPointsController(IUOW uow)
         {
-            _mapPointRepository = mapPointRepository;
+            _uow = uow;
         }
 
         // GET: MapPoints
         public ActionResult Index()
         {
-            return View(_mapPointRepository.All);
+            return View(_uow.MapPoints.All);
         }
 
         // GET: MapPoints/Details/5
@@ -38,7 +35,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = _mapPointRepository.GetById(id);
+            MapPoint mapPoint = _uow.MapPoints.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
@@ -49,7 +46,7 @@ namespace Web.Controllers
         // GET: MapPoints/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName");
+            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
             return View();
         }
 
@@ -62,12 +59,12 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mapPointRepository.Add(mapPoint);
-                _mapPointRepository.SaveChanges();
+                _uow.MapPoints.Add(mapPoint);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -78,12 +75,12 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = _mapPointRepository.GetById(id);
+            MapPoint mapPoint = _uow.MapPoints.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -96,11 +93,11 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _mapPointRepository.Update(mapPoint);
-                _mapPointRepository.SaveChanges();
+                _uow.MapPoints.Update(mapPoint);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(_mapPointRepository.All, "RouteId", "RouteName", mapPoint.RouteId);
+            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
             return View(mapPoint);
         }
 
@@ -111,7 +108,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = _mapPointRepository.GetById(id);
+            MapPoint mapPoint = _uow.MapPoints.GetById(id);
             if (mapPoint == null)
             {
                 return HttpNotFound();
@@ -124,8 +121,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _mapPointRepository.Delete(id);
-            _mapPointRepository.SaveChanges();
+            _uow.MapPoints.Delete(id);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 
@@ -133,7 +130,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                _mapPointRepository.Dispose();
+                _uow.MapPoints.Dispose();
                 //db.Dispose();
             }
             base.Dispose(disposing);

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
@@ -14,11 +15,17 @@ namespace Web.Controllers
     public class EventsController : Controller
     {
         private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
+
+        public EventsController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: Events
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            return View(_uow.Events.All);
         }
 
         // GET: Events/Details/5
@@ -28,7 +35,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = _uow.Events.GetById(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -51,8 +58,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(@event);
-                db.SaveChanges();
+                _uow.Events.Add(@event);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +73,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = _uow.Events.GetById(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -83,8 +90,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.Events.Update(@event);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(@event);
@@ -97,7 +104,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
+            Event @event = _uow.Events.GetById(id);
             if (@event == null)
             {
                 return HttpNotFound();
@@ -110,9 +117,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
-            db.Events.Remove(@event);
-            db.SaveChanges();
+            _uow.Events.Delete(id);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +126,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.Events.Dispose();
             }
             base.Dispose(disposing);
         }

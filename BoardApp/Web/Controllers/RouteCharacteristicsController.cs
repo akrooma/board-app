@@ -7,18 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
 {
     public class RouteCharacteristicsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
+
+        public RouteCharacteristicsController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: RouteCharacteristics
         public ActionResult Index()
         {
-            return View(db.RouteCharacteristics.ToList());
+            return View(_uow.RouteCharacteristics.All);
         }
 
         // GET: RouteCharacteristics/Details/5
@@ -28,7 +34,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteCharacteristic routeCharacteristic = db.RouteCharacteristics.Find(id);
+            RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
@@ -51,8 +57,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.RouteCharacteristics.Add(routeCharacteristic);
-                db.SaveChanges();
+                _uow.RouteCharacteristics.Add(routeCharacteristic);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +72,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteCharacteristic routeCharacteristic = db.RouteCharacteristics.Find(id);
+            RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
@@ -83,8 +89,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(routeCharacteristic).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.RouteCharacteristics.Update(routeCharacteristic);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(routeCharacteristic);
@@ -97,7 +103,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteCharacteristic routeCharacteristic = db.RouteCharacteristics.Find(id);
+            RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
@@ -110,9 +116,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RouteCharacteristic routeCharacteristic = db.RouteCharacteristics.Find(id);
-            db.RouteCharacteristics.Remove(routeCharacteristic);
-            db.SaveChanges();
+            _uow.RouteCharacteristics.Delete(id);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 
@@ -120,7 +125,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.RouteCharacteristics.Dispose();
             }
             base.Dispose(disposing);
         }
