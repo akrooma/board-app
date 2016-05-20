@@ -24,7 +24,8 @@ namespace Web.Controllers
         // GET: RouteComments
         public ActionResult Index()
         {
-            var routeComments = db.RouteComments.Include(r => r.Route);
+            var routeComments = _uow.RouteComments.GetAllIncluding(r => r.Route);
+            //var routeComments = db.RouteComments.Include(r => r.Route);
             return View(routeComments.ToList());
         }
 
@@ -75,7 +76,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteComment routeComment = db.RouteComments.Find(id);
+            RouteComment routeComment = _uow.RouteComments.GetById(id);
             if (routeComment == null)
             {
                 return HttpNotFound();
@@ -93,8 +94,10 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(routeComment).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.RouteComments.Update(routeComment);
+                _uow.Commit();
+                //db.Entry(routeComment).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeComment.RouteId);
@@ -108,7 +111,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteComment routeComment = db.RouteComments.Find(id);
+            RouteComment routeComment = _uow.RouteComments.GetById(id);
             if (routeComment == null)
             {
                 return HttpNotFound();
@@ -121,9 +124,8 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RouteComment routeComment = db.RouteComments.Find(id);
-            db.RouteComments.Remove(routeComment);
-            db.SaveChanges();
+            _uow.RouteComments.Delete(id);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
 
@@ -131,7 +133,7 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.RouteComments.Dispose();
             }
             base.Dispose(disposing);
         }

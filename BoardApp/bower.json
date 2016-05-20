@@ -1,0 +1,26 @@
+{
+  "name": "BoardApp",
+  "homepage": "https://github.com/akrooma/board-app",
+  "authors": [
+    "Ants Kristjan Rooma <antskristjan@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "Web/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "globalize": "^1.1.1",
+    "moment": "^2.13.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
+    "jquery-validation-globalize": "^1.0.0",
+    "bootstrap": "^3.3.6",
+    "respond": "^1.4.2"
+  }
+}

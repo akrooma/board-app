@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
@@ -15,10 +16,17 @@ namespace Web.Controllers
     {
         private DataBaseContext db = new DataBaseContext();
 
+        private IUOW _uow;
+
+        public TransportItemsController(IUOW uow)
+        {
+            _uow = uow;
+        }
+
         // GET: TransportItems
         public ActionResult Index()
         {
-            var transportItems = db.TransportItems.Include(t => t.TransportItemType);
+            var transportItems = _uow.TransportItems.GetAllIncluding(t => t.TransportItemType);
             return View(transportItems.ToList());
         }
 
@@ -29,7 +37,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItem transportItem = db.TransportItems.Find(id);
+            TransportItem transportItem = _uow.TransportItems.GetById(id);
             if (transportItem == null)
             {
                 return HttpNotFound();
@@ -53,8 +61,10 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TransportItems.Add(transportItem);
-                db.SaveChanges();
+                _uow.TransportItems.Add(transportItem);
+                _uow.Commit();
+                //db.TransportItems.Add(transportItem);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

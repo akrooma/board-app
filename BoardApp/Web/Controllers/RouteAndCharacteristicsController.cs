@@ -24,8 +24,7 @@ namespace Web.Controllers
         // GET: RouteAndCharacteristics
         public ActionResult Index()
         {
-            var routeAndCharacteristics = db.RouteAndCharacteristics.Include(r => r.Route).Include(r => r.RouteCharacteristic);
-            _uow.RouteAndCharacteristics.GetAllIncluding(a => a.RouteCharacteristic, p => p.Route);
+            var routeAndCharacteristics = _uow.RouteAndCharacteristics.GetAllIncluding(a => a.RouteCharacteristic, p => p.Route);
             //var routeAndCharacteristics = db.RouteAndCharacteristics.Include(r => r.Route).Include(r => r.RouteCharacteristic);
             return View(routeAndCharacteristics.ToList());
         }

@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class EventsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
         private IUOW _uow;
 
         public EventsController(IUOW uow)

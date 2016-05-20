@@ -7,18 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
 {
     public class RouteInEventsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
+
+        private IUOW _uow;
+
+        public RouteInEventsController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: RouteInEvents
         public ActionResult Index()
         {
-            var routeInEvents = db.RouteInEvents.Include(r => r.Event).Include(r => r.Route);
+            var routeInEvents = _uow.RouteInEvents.GetAllIncluding(r => r.Event, rr => rr.Route);
             return View(routeInEvents.ToList());
         }
 
@@ -29,7 +37,7 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteInEvent routeInEvent = db.RouteInEvents.Find(id);
+            RouteInEvent routeInEvent = _uow.RouteInEvents.GetById(id);
             if (routeInEvent == null)
             {
                 return HttpNotFound();
