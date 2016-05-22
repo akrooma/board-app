@@ -14,6 +14,7 @@ namespace Web.Controllers
 {
     public class RouteCommentsController : Controller
     {
+        private DataBaseContext db = new DataBaseContext();
         private IUOW _uow;
 
         public RouteCommentsController(IUOW uow)

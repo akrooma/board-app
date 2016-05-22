@@ -38,6 +38,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.4\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
@@ -53,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Article.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Identity\Role.cs" />
     <Compile Include="Identity\User.cs" />
@@ -60,12 +64,14 @@
     <Compile Include="Identity\UserLogin.cs" />
     <Compile Include="Identity\UserRole.cs" />
     <Compile Include="MapPoint.cs" />
+    <Compile Include="MultiLangString.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteCharacteristic.cs" />
     <Compile Include="RouteAndCharacteristic.cs" />
     <Compile Include="RouteComment.cs" />
     <Compile Include="RouteInEvent.cs" />
+    <Compile Include="Translation.cs" />
     <Compile Include="TransportItem.cs" />
     <Compile Include="TransportItemType.cs" />
     <Compile Include="TransportItemTypeAttribute.cs" />
@@ -75,7 +81,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{ae8327f7-81e1-406b-b99b-18687714be5b}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -7,3 +7,6 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramew
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\obj\Debug\ConsoleTestApp.exe
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\obj\Debug\ConsoleTestApp.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\NLog.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\bin\Debug\NLog.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\ConsoleTestApp\obj\Debug\ConsoleTestApp.csprojResolveAssemblyReference.cache

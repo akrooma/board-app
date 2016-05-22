@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Interfaces;
+using DAL.Repositories;
+using Domain.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace Identity
 {

@@ -7,3 +7,11 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\NLog.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\Resources.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\Resources.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\NLog.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Domain\bin\Debug\et\Resources.resources.dll
