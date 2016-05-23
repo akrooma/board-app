@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using DataAnnotations;
 using DAL.EFConfiguration;
 using DAL.Helpers;
-using DAL.Migrations;
 using Domain;
 using DAL.Interfaces;
 using Domain.Identity;

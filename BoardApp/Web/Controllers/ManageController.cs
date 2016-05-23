@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using NLog;
-using Web.Models;
 using Web.ViewModels;
 
 namespace Web.Controllers
@@ -28,11 +27,11 @@ namespace Web.Controllers
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
             IAuthenticationManager authenticationManager, ILogger logger)
         {
-            _logger.Info("");
             _userManager = userManager;
             _signInManager = signInManager;
             _authenticationManager = authenticationManager;
             _logger = logger;
+            _logger.Info("");
         }
 
         //
@@ -55,7 +54,7 @@ namespace Web.Controllers
                                         : "";
 
             var userId = User.Identity.GetUserId<int>();
-            var model = new IndexViewModel
+            var model = new ViewModels.IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(userId),

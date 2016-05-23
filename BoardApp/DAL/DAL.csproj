@@ -162,11 +162,6 @@
     <Compile Include="Interfaces\IUserLoginRepository.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Interfaces\IUserRoleRepository.cs" />
-    <Compile Include="Migrations\201603032052188_InitialMigration.cs" />
-    <Compile Include="Migrations\201603032052188_InitialMigration.Designer.cs">
-      <DependentUpon>201603032052188_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\DbMigrationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ArticleRepository.cs" />
     <Compile Include="Repositories\EFRepository.cs" />
@@ -201,11 +196,6 @@
       <Project>{818F47A0-8000-48F4-B523-78C6636E967D}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603032052188_InitialMigration.resx">
-      <DependentUpon>201603032052188_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

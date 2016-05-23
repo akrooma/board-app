@@ -14,16 +14,16 @@ namespace Domain
 
         [MinLength(1)]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string RouteName { get; set; }
 
         [MaxLength(1000)]
-        public string Description { get; set; }
-        public int Rating { get; set; }
+        public string RouteDescription { get; set; }
+        public int RouteRating { get; set; }
 
         public virtual List<MapPoint> MapPoints { get; set; } = new List<MapPoint>();
-        public virtual List<RouteAndCharacteristic> Characteristics { get; set; } = new List<RouteAndCharacteristic>();
-        public virtual List<RouteComment> Comments { get; set; } = new List<RouteComment>(); 
-        public virtual List<RouteInEvent> InEvents { get; set; } = new List<RouteInEvent>(); 
+        public virtual List<RouteAndCharacteristic> RouteCharacteristics { get; set; } = new List<RouteAndCharacteristic>();
+        public virtual List<RouteComment> RouteComments { get; set; } = new List<RouteComment>(); 
+        public virtual List<RouteInEvent> RouteInEvents { get; set; } = new List<RouteInEvent>(); 
 
         /*
         [ForeignKey("Creator")]

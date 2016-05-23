@@ -13,14 +13,14 @@ namespace Domain
 
         [MinLength(1)]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string EventName { get; set; }
 
-        public DateTime CreationDate { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime EventCreationDate { get; set; }
+        public DateTime EventStartDate { get; set; }
+        public DateTime EventEndDate { get; set; }
 
         [MaxLength(1000)]
-        public string Description { get; set; }
+        public string EventDescription { get; set; }
 
         public virtual List<RouteInEvent> RoutesInEvent { get; set; } = new List<RouteInEvent>(); 
 

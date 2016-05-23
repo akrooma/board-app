@@ -32,6 +32,14 @@ namespace DAL.Helpers
             return new Dictionary<Type, Func<IDbContext, object>>
                 {
                     //{typeof(IPersonRepository), dbContext => new PersonRepository(dbContext)},
+                    //{typeof (IMultiLangStringRepository), dbContext => new MultiLangStringRepository(dbContext)},
+                    //{typeof (ITranslationRepository), dbContext => new TranslationRepsoitory(dbContext)},
+                    {typeof (IArticleRepository), dbContext => new ArticleRepository(dbContext)},
+                    {typeof (IUserIntRepository), dbContext => new UserIntRepository(dbContext)},
+                    {typeof (IUserRoleIntRepository), dbContext => new UserRoleIntRepository(dbContext)},
+                    {typeof (IUserClaimIntRepository), dbContext => new UserClaimIntRepository(dbContext)},
+                    {typeof (IUserLoginIntRepository), dbContext => new UserLoginIntRepository(dbContext)},
+                    {typeof (IRoleIntRepository), dbContext => new RoleIntRepository(dbContext)},
                 };
         }
 

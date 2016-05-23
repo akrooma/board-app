@@ -14,6 +14,14 @@ namespace DAL
     {
         protected override void Seed(DataBaseContext context)
         {
+            seedIdentity(context);
+            seedArticles(context);
+
+            base.Seed(context);
+        }
+
+        private void seedIdentity(DataBaseContext context)
+        {
             var passwordHasher = new PasswordHasher();
 
             // Roles
@@ -72,7 +80,10 @@ namespace DAL
             });
 
             context.SaveChanges();
+        }
 
+        private void seedArticles(DataBaseContext context)
+        {
             var articleHeadLine = "<h1>ASP.NET</h1>";
             var articleBody =
                 "<p class=\"lead\">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.<br/>" +
@@ -103,8 +114,6 @@ namespace DAL
                 MultiLangString = article.ArticleBody
             });
             context.SaveChanges();
-
-            base.Seed(context);
         }
     }
 }
