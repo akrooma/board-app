@@ -106,3 +106,15 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\WebActivatorEx.dll
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Ninject.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Ninject.Web.Common.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Ninject.Web.Mvc.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.config
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Identity.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.Web.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Resources.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\DataAnnotations.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Identity.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\Resources.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.Web.xml
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\DataAnnotations.pdb
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\et\Resources.resources.dll

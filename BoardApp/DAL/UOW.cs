@@ -50,6 +50,8 @@ namespace DAL
 
         public IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues 
             => GetStandardRepo<TransportItemTypeAttributeValue>();
+        public IEFRepository<MultiLangString> MultiLangStrings => GetStandardRepo<MultiLangString>();
+        public IEFRepository<Translation> Translations => GetStandardRepo<Translation>();
 
         //public IEFRepository<Contact> Contacts => GetStandardRepo<Contact>();
         //public IEFRepository<ContactType> ContactTypes => GetStandardRepo<ContactType>();
@@ -57,6 +59,13 @@ namespace DAL
         // repo with custom methods
         // add it also in EFRepositoryFactories.cs, in method GetCustomFactories
         // public IPersonRepository Persons => GetRepo<IPersonRepository>();
+        public IArticleRepository Articles => GetRepo<IArticleRepository>();
+ 
+        public IUserIntRepository UsersInt => GetRepo<IUserIntRepository>();
+        public IUserRoleIntRepository UserRolesInt => GetRepo<IUserRoleIntRepository>();
+        public IRoleIntRepository RolesInt => GetRepo<IRoleIntRepository>();
+        public IUserClaimIntRepository UserClaimsInt => GetRepo<IUserClaimIntRepository>();
+        public IUserLoginIntRepository UserLoginsInt => GetRepo<IUserLoginIntRepository>();
 
         // calling standard EF repo provider
         private IEFRepository<T> GetStandardRepo<T>() where T : class

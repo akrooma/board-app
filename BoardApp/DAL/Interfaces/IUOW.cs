@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Identity;
 
 namespace DAL.Interfaces
 {
@@ -27,6 +28,19 @@ namespace DAL.Interfaces
         IEFRepository<TransportItemType> TransportItemTypes { get; }
         IEFRepository<TransportItemTypeAttribute> TransportItemTypeAttributes { get; }
         IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues { get; }
+
+
+        IEFRepository<MultiLangString> MultiLangStrings { get; }
+        IEFRepository<Translation> Translations { get; }
+
+        IArticleRepository Articles { get; }
+
+        IUserIntRepository UsersInt { get; }
+        IUserRoleIntRepository UserRolesInt { get; }
+        IRoleIntRepository RolesInt { get; }
+        IUserClaimIntRepository UserClaimsInt { get; }
+        IUserLoginIntRepository UserLoginsInt { get; }
+
         //IEFRepository<Contact> Contacts { get; }
         //IEFRepository<ContactType> ContactTypes { get; }
 
