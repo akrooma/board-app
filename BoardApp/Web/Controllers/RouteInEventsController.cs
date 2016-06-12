@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class RouteInEventsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
 
         private IUOW _uow;
 
@@ -27,6 +27,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             var routeInEvents = _uow.RouteInEvents.GetAllIncluding(r => r.Event, rr => rr.Route);
+
             return View(routeInEvents.ToList());
         }
 
@@ -37,19 +38,23 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteInEvent routeInEvent = _uow.RouteInEvents.GetById(id);
+
             if (routeInEvent == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeInEvent);
         }
 
         // GET: RouteInEvents/Create
         public ActionResult Create()
         {
-            ViewBag.EventId = new SelectList(db.Events, "EventId", "EventName");
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName");
+            ViewBag.EventId = new SelectList(_uow.Events.All, "EventId", "EventName");
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
+
             return View();
         }
 
@@ -62,13 +67,15 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.RouteInEvents.Add(routeInEvent);
-                db.SaveChanges();
+                _uow.RouteInEvents.Add(routeInEvent);
+                _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.EventId = new SelectList(db.Events, "EventId", "EventName", routeInEvent.EventId);
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeInEvent.RouteId);
+            ViewBag.EventId = new SelectList(_uow.Events.All, "EventId", "EventName", routeInEvent.EventId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeInEvent.RouteId);
+
             return View(routeInEvent);
         }
 
@@ -79,13 +86,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteInEvent routeInEvent = db.RouteInEvents.Find(id);
+
+            RouteInEvent routeInEvent = _uow.RouteInEvents.GetById(id);
+
             if (routeInEvent == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EventId = new SelectList(db.Events, "EventId", "EventName", routeInEvent.EventId);
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeInEvent.RouteId);
+
+            ViewBag.EventId = new SelectList(_uow.Events.All, "EventId", "EventName", routeInEvent.EventId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeInEvent.RouteId);
+
             return View(routeInEvent);
         }
 
@@ -98,12 +109,15 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(routeInEvent).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.RouteInEvents.Update(routeInEvent);
+                _uow.Commit();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.EventId = new SelectList(db.Events, "EventId", "EventName", routeInEvent.EventId);
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeInEvent.RouteId);
+
+            ViewBag.EventId = new SelectList(_uow.Events.All, "EventId", "EventName", routeInEvent.EventId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeInEvent.RouteId);
+
             return View(routeInEvent);
         }
 
@@ -114,11 +128,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RouteInEvent routeInEvent = db.RouteInEvents.Find(id);
+
+            RouteInEvent routeInEvent = _uow.RouteInEvents.GetById(id);
+
             if (routeInEvent == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeInEvent);
         }
 
@@ -127,9 +144,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RouteInEvent routeInEvent = db.RouteInEvents.Find(id);
-            db.RouteInEvents.Remove(routeInEvent);
-            db.SaveChanges();
+            _uow.RouteInEvents.Delete(id);
+            _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
@@ -137,8 +154,9 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.RouteInEvents.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

@@ -35,7 +35,9 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             MapPoint mapPoint = _uow.MapPoints.GetById(id);
+
             if (mapPoint == null)
             {
                 return HttpNotFound();
@@ -47,6 +49,7 @@ namespace Web.Controllers
         public ActionResult Create()
         {
             ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
+
             return View();
         }
 
@@ -65,6 +68,7 @@ namespace Web.Controllers
             }
 
             ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
+
             return View(mapPoint);
         }
 
@@ -81,6 +85,7 @@ namespace Web.Controllers
                 return HttpNotFound();
             }
             ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
+
             return View(mapPoint);
         }
 
@@ -97,7 +102,9 @@ namespace Web.Controllers
                 _uow.Commit();
                 return RedirectToAction("Index");
             }
+
             ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
+
             return View(mapPoint);
         }
 
@@ -108,11 +115,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             MapPoint mapPoint = _uow.MapPoints.GetById(id);
+
             if (mapPoint == null)
             {
                 return HttpNotFound();
             }
+
             return View(mapPoint);
         }
 
@@ -123,6 +133,7 @@ namespace Web.Controllers
         {
             _uow.MapPoints.Delete(id);
             _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
@@ -131,7 +142,6 @@ namespace Web.Controllers
             if (disposing)
             {
                 _uow.MapPoints.Dispose();
-                //db.Dispose();
             }
             base.Dispose(disposing);
         }

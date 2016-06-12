@@ -7,18 +7,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
 {
     public class TransportItemTypesController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
+
+        public TransportItemTypesController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: TransportItemTypes
         public ActionResult Index()
         {
-            return View(db.TransportItemTypes.ToList());
+            return View(_uow.TransportItemTypes.All);
         }
 
         // GET: TransportItemTypes/Details/5
@@ -28,11 +34,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemType transportItemType = db.TransportItemTypes.Find(id);
+
+            TransportItemType transportItemType = _uow.TransportItemTypes.GetById(id);
+
             if (transportItemType == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItemType);
         }
 
@@ -51,8 +60,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TransportItemTypes.Add(transportItemType);
-                db.SaveChanges();
+                _uow.TransportItemTypes.Add(transportItemType);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -66,11 +75,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemType transportItemType = db.TransportItemTypes.Find(id);
+
+            TransportItemType transportItemType = _uow.TransportItemTypes.GetById(id);
+
             if (transportItemType == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItemType);
         }
 
@@ -83,8 +95,8 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transportItemType).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.TransportItemTypes.Update(transportItemType);
+                _uow.Commit();
                 return RedirectToAction("Index");
             }
             return View(transportItemType);
@@ -97,11 +109,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemType transportItemType = db.TransportItemTypes.Find(id);
+
+            TransportItemType transportItemType = _uow.TransportItemTypes.GetById(id);
+
             if (transportItemType == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItemType);
         }
 
@@ -110,18 +125,19 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TransportItemType transportItemType = db.TransportItemTypes.Find(id);
-            db.TransportItemTypes.Remove(transportItemType);
-            db.SaveChanges();
+            _uow.TransportItemTypes.Delete(id);
+            _uow.Commit();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.TransportItemTypes.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

@@ -7,18 +7,25 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
+using DAL.Interfaces;
 using Domain;
 
 namespace Web.Controllers
 {
     public class TransportItemTypeAttributesController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        private IUOW _uow;
+
+        public TransportItemTypeAttributesController(IUOW uow)
+        {
+            _uow = uow;
+        }
 
         // GET: TransportItemTypeAttributes
         public ActionResult Index()
         {
-            var transportItemTypeAttributes = db.TransportItemTypeAttributes.Include(t => t.TransportItemType);
+            var transportItemTypeAttributes = _uow.TransportItemTypeAttributes.GetAllIncluding(t => t.TransportItemType);
+
             return View(transportItemTypeAttributes.ToList());
         }
 
@@ -29,18 +36,22 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemTypeAttribute transportItemTypeAttribute = db.TransportItemTypeAttributes.Find(id);
+
+            TransportItemTypeAttribute transportItemTypeAttribute = _uow.TransportItemTypeAttributes.GetById(id);
+
             if (transportItemTypeAttribute == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItemTypeAttribute);
         }
 
         // GET: TransportItemTypeAttributes/Create
         public ActionResult Create()
         {
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name");
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name");
+
             return View();
         }
 
@@ -53,12 +64,14 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TransportItemTypeAttributes.Add(transportItemTypeAttribute);
-                db.SaveChanges();
+                _uow.TransportItemTypeAttributes.Add(transportItemTypeAttribute);
+                _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+
             return View(transportItemTypeAttribute);
         }
 
@@ -69,12 +82,16 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemTypeAttribute transportItemTypeAttribute = db.TransportItemTypeAttributes.Find(id);
+
+            TransportItemTypeAttribute transportItemTypeAttribute = _uow.TransportItemTypeAttributes.GetById(id);
+
             if (transportItemTypeAttribute == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+
             return View(transportItemTypeAttribute);
         }
 
@@ -87,11 +104,15 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transportItemTypeAttribute).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.TransportItemTypeAttributes.Update(transportItemTypeAttribute);
+
+                _uow.Commit();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItemTypeAttribute.TransportItemTypeId);
+
             return View(transportItemTypeAttribute);
         }
 
@@ -102,11 +123,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItemTypeAttribute transportItemTypeAttribute = db.TransportItemTypeAttributes.Find(id);
+
+            TransportItemTypeAttribute transportItemTypeAttribute = _uow.TransportItemTypeAttributes.GetById(id);
+
             if (transportItemTypeAttribute == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItemTypeAttribute);
         }
 
@@ -115,9 +139,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TransportItemTypeAttribute transportItemTypeAttribute = db.TransportItemTypeAttributes.Find(id);
-            db.TransportItemTypeAttributes.Remove(transportItemTypeAttribute);
-            db.SaveChanges();
+            _uow.TransportItemTypeAttributes.Delete(id);
+            _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
@@ -125,8 +149,9 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _uow.TransportItemTypeAttributes.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class RouteCommentsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
         private IUOW _uow;
 
         public RouteCommentsController(IUOW uow)
@@ -48,7 +48,7 @@ namespace Web.Controllers
         // GET: RouteComments/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName");
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
             return View();
         }
 
@@ -66,7 +66,8 @@ namespace Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeComment.RouteId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
+
             return View(routeComment);
         }
 
@@ -77,12 +78,16 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteComment routeComment = _uow.RouteComments.GetById(id);
+
             if (routeComment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeComment.RouteId);
+
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
+
             return View(routeComment);
         }
 
@@ -97,11 +102,10 @@ namespace Web.Controllers
             {
                 _uow.RouteComments.Update(routeComment);
                 _uow.Commit();
-                //db.Entry(routeComment).State = EntityState.Modified;
-                //db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeComment.RouteId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
             return View(routeComment);
         }
 
@@ -112,11 +116,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteComment routeComment = _uow.RouteComments.GetById(id);
+
             if (routeComment == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeComment);
         }
 
@@ -127,6 +134,7 @@ namespace Web.Controllers
         {
             _uow.RouteComments.Delete(id);
             _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
@@ -136,6 +144,7 @@ namespace Web.Controllers
             {
                 _uow.RouteComments.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

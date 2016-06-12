@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class RouteAndCharacteristicsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
         private IUOW _uow;
 
         public RouteAndCharacteristicsController(IUOW uow)
@@ -48,8 +48,9 @@ namespace Web.Controllers
         // GET: RouteAndCharacteristics/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName");
-            ViewBag.RouteCharacteristicId = new SelectList(db.RouteCharacteristics, "RouteCharacteristicId", "RouteCharacteristicName");
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
+            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName");
+
             return View();
         }
 
@@ -64,11 +65,13 @@ namespace Web.Controllers
             {
                 _uow.RouteAndCharacteristics.Add(routeAndCharacteristic);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(db.RouteCharacteristics, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
+            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+
             return View(routeAndCharacteristic);
         }
 
@@ -79,13 +82,17 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteAndCharacteristic routeAndCharacteristic = _uow.RouteAndCharacteristics.GetById(id);
+
             if (routeAndCharacteristic == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(db.RouteCharacteristics, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
+            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+
             return View(routeAndCharacteristic);
         }
 
@@ -102,8 +109,8 @@ namespace Web.Controllers
                 _uow.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(db.Routes, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(db.RouteCharacteristics, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
+            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
             return View(routeAndCharacteristic);
         }
 
@@ -114,11 +121,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteAndCharacteristic routeAndCharacteristic = _uow.RouteAndCharacteristics.GetById(id);
+
             if (routeAndCharacteristic == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeAndCharacteristic);
         }
 
@@ -129,6 +139,7 @@ namespace Web.Controllers
         {
             _uow.RouteAndCharacteristics.Delete(id);
             _uow.Commit();
+
             return RedirectToAction("Index");
         }
 

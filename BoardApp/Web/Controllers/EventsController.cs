@@ -35,11 +35,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Event @event = _uow.Events.GetById(id);
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
+
             return View(@event);
         }
 
@@ -60,6 +63,7 @@ namespace Web.Controllers
             {
                 _uow.Events.Add(@event);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
@@ -73,11 +77,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Event @event = _uow.Events.GetById(id);
+
             if (@event == null)
             {
                 return HttpNotFound();
             }
+
             return View(@event);
         }
 

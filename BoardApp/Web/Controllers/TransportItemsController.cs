@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class TransportItemsController : Controller
     {
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext();
 
         private IUOW _uow;
 
@@ -48,7 +48,7 @@ namespace Web.Controllers
         // GET: TransportItems/Create
         public ActionResult Create()
         {
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name");
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name");
             return View();
         }
 
@@ -63,12 +63,11 @@ namespace Web.Controllers
             {
                 _uow.TransportItems.Add(transportItem);
                 _uow.Commit();
-                //db.TransportItems.Add(transportItem);
-                //db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
             return View(transportItem);
         }
 
@@ -79,12 +78,16 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItem transportItem = db.TransportItems.Find(id);
+
+            TransportItem transportItem = _uow.TransportItems.GetById(id);
+
             if (transportItem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+
             return View(transportItem);
         }
 
@@ -97,11 +100,13 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transportItem).State = EntityState.Modified;
-                db.SaveChanges();
+                _uow.TransportItems.Update(transportItem);
+
                 return RedirectToAction("Index");
             }
-            ViewBag.TransportItemTypeId = new SelectList(db.TransportItemTypes, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+
+            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+
             return View(transportItem);
         }
 
@@ -112,11 +117,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TransportItem transportItem = db.TransportItems.Find(id);
+
+            TransportItem transportItem = _uow.TransportItems.GetById(id);
+
             if (transportItem == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItem);
         }
 
@@ -125,9 +133,9 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TransportItem transportItem = db.TransportItems.Find(id);
-            db.TransportItems.Remove(transportItem);
-            db.SaveChanges();
+            _uow.TransportItems.Delete(id);
+            _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
@@ -135,8 +143,9 @@ namespace Web.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+               _uow.TransportItems.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

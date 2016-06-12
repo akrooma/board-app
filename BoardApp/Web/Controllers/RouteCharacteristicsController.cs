@@ -34,17 +34,21 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
+
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeCharacteristic);
         }
 
         // GET: RouteCharacteristics/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -59,6 +63,7 @@ namespace Web.Controllers
             {
                 _uow.RouteCharacteristics.Add(routeCharacteristic);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
@@ -72,11 +77,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
+
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeCharacteristic);
         }
 
@@ -91,8 +99,10 @@ namespace Web.Controllers
             {
                 _uow.RouteCharacteristics.Update(routeCharacteristic);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
+
             return View(routeCharacteristic);
         }
 
@@ -103,11 +113,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteCharacteristic routeCharacteristic = _uow.RouteCharacteristics.GetById(id);
+
             if (routeCharacteristic == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeCharacteristic);
         }
 
@@ -118,6 +131,7 @@ namespace Web.Controllers
         {
             _uow.RouteCharacteristics.Delete(id);
             _uow.Commit();
+
             return RedirectToAction("Index");
         }
 
