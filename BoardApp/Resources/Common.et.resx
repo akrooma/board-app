@@ -159,10 +159,13 @@
   <data name="Register" xml:space="preserve">
     <value>Registreeru</value>
   </data>
-  <data name="String1FieldMustBeDataTypeDateTime" xml:space="preserve">
+  <data name="FieldMustBeDataTypeDateTime" xml:space="preserve">
     <value>Väli {0} peab sisaldama kuupäeva ja kellaaega.</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Kinnita</value>
+  </data>
+  <data name="SelectOptionLabel" xml:space="preserve">
+    <value>--- Vali! ---</value>
   </data>
 </root>

@@ -7,13 +7,14 @@ using Domain;
 
 namespace Web.ViewModels
 {
-    public class MapPointCreateViewModel
+    public class RouteCommentCreateViewModel
     {
-        public MapPoint MapPoint { get; set; }
+        public RouteComment RouteComment { get; set; }
         public SelectList RouteSelectList { get; set; }
     }
 
-    public class MapPointEditViewModel : MapPointCreateViewModel
+    public class RouteCommentEditViewModel : RouteCommentCreateViewModel
     {
+        
     }
 }

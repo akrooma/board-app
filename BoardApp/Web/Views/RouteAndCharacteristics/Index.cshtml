@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Route.RouteName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RouteCharacteristic.RouteCharacteristicName)
+            @Html.DisplayNameFor(model => model.RouteCharacteristic.Name)
         </th>
         <th></th>
     </tr>
@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.Route.RouteName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RouteCharacteristic.RouteCharacteristicName)
+            @Html.DisplayFor(modelItem => item.RouteCharacteristic.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.RouteAndCharacteristicId }) |

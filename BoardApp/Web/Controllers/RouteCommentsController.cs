@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -37,19 +38,24 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteComment routeComment = _uow.RouteComments.GetById(id);
+
             if (routeComment == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeComment);
         }
 
         // GET: RouteComments/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
-            return View();
+            var _vm = new RouteCommentCreateViewModel();
+            _vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
+
+            return View(_vm);
         }
 
         // POST: RouteComments/Create
@@ -57,38 +63,40 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RouteCommentId,RouteCommentContent,PostDate,UpdateDate,OwnerId,RouteId")] RouteComment routeComment)
+        public ActionResult Create(RouteCommentCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.RouteComments.Add(routeComment);
+                _uow.RouteComments.Add(vm.RouteComment);
                 _uow.Commit();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
+            vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", vm.RouteComment.RouteId);
 
-            return View(routeComment);
+            return View(vm);
         }
 
         // GET: RouteComments/Edit/5
         public ActionResult Edit(int? id)
         {
+            var _vm = new RouteCommentEditViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            RouteComment routeComment = _uow.RouteComments.GetById(id);
+            _vm.RouteComment = _uow.RouteComments.GetById(id);
 
-            if (routeComment == null)
+            if (_vm.RouteComment == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
+            _vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", _vm.RouteComment.RouteId);
 
-            return View(routeComment);
+            return View(_vm);
         }
 
         // POST: RouteComments/Edit/5
@@ -96,17 +104,19 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RouteCommentId,RouteCommentContent,PostDate,UpdateDate,OwnerId,RouteId")] RouteComment routeComment)
+        public ActionResult Edit(RouteCommentEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.RouteComments.Update(routeComment);
+                _uow.RouteComments.Update(vm.RouteComment);
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeComment.RouteId);
-            return View(routeComment);
+
+            vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", vm.RouteComment.RouteId);
+
+            return View(vm);
         }
 
         // GET: RouteComments/Delete/5

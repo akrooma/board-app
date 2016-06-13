@@ -141,6 +141,7 @@ namespace Web.Controllers
             {
                 _uow.RouteCharacteristics.Dispose();
             }
+
             base.Dispose(disposing);
         }
     }

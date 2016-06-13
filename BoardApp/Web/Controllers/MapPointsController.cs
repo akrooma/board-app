@@ -52,7 +52,7 @@ namespace Web.Controllers
         {
             var _vm = new MapPointCreateViewModel();
 
-            _vm.RoutesSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
+            _vm.RouteSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
 
             return View(_vm);
         }
@@ -62,35 +62,41 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MapPointId,Latitude,Longitude,RouteId,CreatorId")] MapPoint mapPoint)
+        public ActionResult Create(MapPointCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.MapPoints.Add(mapPoint);
+                _uow.MapPoints.Add(vm.MapPoint);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
+            vm.RouteSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", vm.MapPoint.RouteId);
 
-            return View(mapPoint);
+            return View(vm);
         }
 
         // GET: MapPoints/Edit/5
         public ActionResult Edit(int? id)
         {
+            var _vm = new MapPointEditViewModel();
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MapPoint mapPoint = _uow.MapPoints.GetById(id);
-            if (mapPoint == null)
+
+            _vm.MapPoint = _uow.MapPoints.GetById(id);
+
+            if (_vm.MapPoint == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
 
-            return View(mapPoint);
+            _vm.RouteSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", _vm.MapPoint.RouteId);
+
+            return View(_vm);
         }
 
         // POST: MapPoints/Edit/5
@@ -98,18 +104,19 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MapPointId,Latitude,Longitude,RouteId,CreatorId")] MapPoint mapPoint)
+        public ActionResult Edit(MapPointEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.MapPoints.Update(mapPoint);
+                _uow.MapPoints.Update(vm.MapPoint);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", mapPoint.RouteId);
+            vm.RouteSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName", vm.MapPoint.RouteId);
 
-            return View(mapPoint);
+            return View(vm);
         }
 
         // GET: MapPoints/Delete/5

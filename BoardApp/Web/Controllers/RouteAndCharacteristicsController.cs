@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -51,10 +52,12 @@ namespace Web.Controllers
         // GET: RouteAndCharacteristics/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
-            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName");
+            var _vm = new RouteAndCharacteristicCreateViewModel();
 
-            return View();
+            _vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName");
+            _vm.RouteCharacteristicSelectList = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName");
+
+            return View(_vm);
         }
 
         // POST: RouteAndCharacteristics/Create
@@ -62,41 +65,43 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RouteAndCharacteristicId,RouteId,RouteCharacteristicId")] RouteAndCharacteristic routeAndCharacteristic)
+        public ActionResult Create(RouteAndCharacteristicCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.RouteAndCharacteristics.Add(routeAndCharacteristic);
+                _uow.RouteAndCharacteristics.Add(vm.RouteAndCharacteristic);
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+            vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", vm.RouteAndCharacteristic.RouteId);
+            vm.RouteCharacteristicSelectList = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", vm.RouteAndCharacteristic.RouteCharacteristicId);
 
-            return View(routeAndCharacteristic);
+            return View(vm);
         }
 
         // GET: RouteAndCharacteristics/Edit/5
         public ActionResult Edit(int? id)
         {
+            var _vm = new RouteAndCharacteristicEditViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            RouteAndCharacteristic routeAndCharacteristic = _uow.RouteAndCharacteristics.GetById(id);
+            _vm.RouteAndCharacteristic = _uow.RouteAndCharacteristics.GetById(id);
 
-            if (routeAndCharacteristic == null)
+            if (_vm.RouteAndCharacteristic == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
+            _vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", _vm.RouteAndCharacteristic.RouteId);
+            _vm.RouteCharacteristicSelectList = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", _vm.RouteAndCharacteristic.RouteCharacteristicId);
 
-            return View(routeAndCharacteristic);
+            return View(_vm);
         }
 
         // POST: RouteAndCharacteristics/Edit/5
@@ -104,17 +109,20 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RouteAndCharacteristicId,RouteId,RouteCharacteristicId")] RouteAndCharacteristic routeAndCharacteristic)
+        public ActionResult Edit(RouteAndCharacteristicEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.RouteAndCharacteristics.Update(routeAndCharacteristic);
+                _uow.RouteAndCharacteristics.Update(vm.RouteAndCharacteristic);
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.RouteId = new SelectList(_uow.Routes.All, "RouteId", "RouteName", routeAndCharacteristic.RouteId);
-            ViewBag.RouteCharacteristicId = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", routeAndCharacteristic.RouteCharacteristicId);
-            return View(routeAndCharacteristic);
+
+            vm.RouteSelectList = new SelectList(_uow.Routes.All, "RouteId", "RouteName", vm.RouteAndCharacteristic.RouteId);
+            vm.RouteCharacteristicSelectList = new SelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "RouteCharacteristicName", vm.RouteAndCharacteristic.RouteCharacteristicId);
+
+            return View(vm);
         }
 
         // GET: RouteAndCharacteristics/Delete/5
