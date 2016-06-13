@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CharacteristicIds, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CharacteristicIds, Model.RouteCharacteristicSelectList, @Resources.Common.SelectOptionLabel, new { @class = "form-control" })
+                @Html.ListBoxFor(i => Model.CharacteristicIds, Model.RouteCharacteristicSelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CharacteristicIds, "", new { @class = "text-danger" })
             </div>
         </div>

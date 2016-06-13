@@ -56,7 +56,10 @@ namespace Web.Controllers
         // GET: Routes/Create
         public ActionResult Create()
         {
-            return View();
+            var _vm = new RouteCreateViewModel();
+            _vm.RouteCharacteristicSelectList = new MultiSelectList(_uow.RouteCharacteristics.All, "RouteCharacteristicId", "Name");
+            
+            return View(_vm);
         }
 
         // POST: Routes/Create
@@ -69,6 +72,20 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 _uow.Routes.Add(vm.Route);
+
+                if (vm.CharacteristicIds.Count > 0)
+                {
+                    foreach (var routeCharacteristicId in vm.CharacteristicIds)
+                    {
+                        _uow.RouteAndCharacteristics.Add(
+                            new RouteAndCharacteristic
+                            {
+                                RouteId = vm.Route.RouteId,
+                                RouteCharacteristicId = routeCharacteristicId
+                            }
+                        );
+                    }
+                }
 
                 _uow.Commit();
 

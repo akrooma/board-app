@@ -118,3 +118,5 @@ C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\NLog.Web.xml
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\DataAnnotations.pdb
 C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\et\Resources.resources.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\HtmlHelpers.dll
+C:\Users\Kristjan\Desktop\ASP net\BoardApp\Web\bin\HtmlHelpers.pdb
