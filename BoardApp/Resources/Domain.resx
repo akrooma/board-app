@@ -129,6 +129,9 @@
   <data name="FirstLastName" xml:space="preserve">
     <value>First-, Lastname</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
   <data name="LastFirstName" xml:space="preserve">
     <value>Last-, Firstname</value>
   </data>

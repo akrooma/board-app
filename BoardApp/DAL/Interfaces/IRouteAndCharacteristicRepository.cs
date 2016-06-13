@@ -9,5 +9,6 @@ namespace DAL.Interfaces
 {
     public interface IRouteAndCharacteristicRepository : IEFRepository<RouteAndCharacteristic>
     {
+        List<RouteAndCharacteristic> GetCharacteristicsForRoute(int id);
     }
 }

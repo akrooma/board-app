@@ -7,8 +7,7 @@ using Domain;
 
 namespace DAL.Interfaces
 {
-    public interface IRouteCommentRepository : IEFRepository<RouteComment>
+    public interface IMultiLangStringRepository : IEFRepository<MultiLangString>
     {
-        List<RouteComment> GetAllCommentsForRoute(int id);
     }
 }

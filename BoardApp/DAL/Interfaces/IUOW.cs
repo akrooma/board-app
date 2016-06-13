@@ -21,30 +21,27 @@ namespace DAL.Interfaces
         IEFRepository<MapPoint> MapPoints { get; }
         IEFRepository<Route> Routes { get; }
         IEFRepository<RouteCharacteristic> RouteCharacteristics { get; }
-        IEFRepository<RouteAndCharacteristic> RouteAndCharacteristics { get; }
-        IEFRepository<RouteComment> RouteComments { get; }
+        
+        
         IEFRepository<RouteInEvent> RouteInEvents { get; }
         IEFRepository<TransportItem> TransportItems { get; }
         IEFRepository<TransportItemType> TransportItemTypes { get; }
         IEFRepository<TransportItemTypeAttribute> TransportItemTypeAttributes { get; }
         IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues { get; }
 
-
-        IEFRepository<MultiLangString> MultiLangStrings { get; }
-        IEFRepository<Translation> Translations { get; }
+        //Customs repos, manually implemented. Repos with custom methos.
+        IRouteCommentRepository RouteComments { get; }
+        IRouteAndCharacteristicRepository RouteAndCharacteristics { get; }
 
         IArticleRepository Articles { get; }
+        IMultiLangStringRepository MultiLangStrings { get; }
+        ITranslationRepository Translations { get; }
 
+        // Identity
         IUserIntRepository UsersInt { get; }
         IUserRoleIntRepository UserRolesInt { get; }
         IRoleIntRepository RolesInt { get; }
         IUserClaimIntRepository UserClaimsInt { get; }
         IUserLoginIntRepository UserLoginsInt { get; }
-
-        //IEFRepository<Contact> Contacts { get; }
-        //IEFRepository<ContactType> ContactTypes { get; }
-
-        //Customs repos, manually implemented. Repos with custom methos.
-        //IPersonRepository Persons { get; }
     }
 }

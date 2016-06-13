@@ -1,4 +1,4 @@
-﻿@model Domain.Route
+﻿@model Web.ViewModels.RouteDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,40 +11,57 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.RouteName)
+            @Html.DisplayNameFor(model => model.Route.RouteName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RouteName)
+            @Html.DisplayFor(model => model.Route.RouteName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RouteDescription)
+            @Html.DisplayNameFor(model => model.Route.RouteDescription)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RouteDescription)
+            @Html.DisplayFor(model => model.Route.RouteDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RouteRating)
+            @Html.DisplayNameFor(model => model.Route.RouteRating)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RouteRating)
+            @Html.DisplayFor(model => model.Route.RouteRating)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatorId)
+            @Html.DisplayNameFor(model => model.Characteristics)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatorId)
-        </dd>
+        @foreach (var characteristic in Model.Characteristics)
+        {
+            <dd>
+                @Html.DisplayFor(model => characteristic.RouteCharacteristic.Name)
+            </dd>
+        }
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        @foreach (var comment in Model.Comments)
+        {
+            <dd>
+                @Html.DisplayFor(model => comment.Content)
+            </dd>
+        }
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RouteId }) |
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Route.RouteId })
+    }
+     |
     @Html.ActionLink("Back to List", "Index")
 </p>

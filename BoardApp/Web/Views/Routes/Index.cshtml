@@ -35,9 +35,13 @@
             @Html.DisplayFor(modelItem => item.RouteRating)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RouteId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RouteId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RouteId })
+            @Html.ActionLink("Details", "Details", new {id = item.RouteId}) |
+
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new {id = item.RouteId})<p> | </p>
+                @Html.ActionLink("Delete", "Delete", new { id = item.RouteId })
+            } 
         </td>
     </tr>
 }

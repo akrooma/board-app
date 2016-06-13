@@ -13,7 +13,7 @@ namespace Domain
         public int RouteId { get; set; }
 
         [MinLength(1)]
-        [MaxLength(100)]
+        [MaxLength(128)]
         public string RouteName { get; set; }
 
         [MaxLength(1000)]

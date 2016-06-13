@@ -57,7 +57,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RouteCharacteristicId,RouteCharacteristicName,RouteCharacteristicComment")] RouteCharacteristic routeCharacteristic)
+        public ActionResult Create([Bind(Include = "RouteCharacteristicId,Name,Comment")] RouteCharacteristic routeCharacteristic)
         {
             if (ModelState.IsValid)
             {

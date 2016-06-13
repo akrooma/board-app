@@ -14,5 +14,10 @@ namespace DAL.Repositories
         public RouteAndCharacteristicRepository(IDbContext dbContext) : base(dbContext)
         {
         }
+
+        public List<RouteAndCharacteristic> GetCharacteristicsForRoute(int id)
+        {
+            return this.All.Where(r => r.RouteId == id).ToList();
+        }
     }
 }

@@ -10,10 +10,11 @@ using DAL;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
-    public class MapPointsController : Controller
+    public class MapPointsController : BaseController
     {
         private IUOW _uow;
 
@@ -42,15 +43,18 @@ namespace Web.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(mapPoint);
         }
 
         // GET: MapPoints/Create
         public ActionResult Create()
         {
-            ViewBag.RouteId = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
+            var _vm = new MapPointCreateViewModel();
 
-            return View();
+            _vm.RoutesSelectList = new SelectList(_uow.MapPoints.All, "RouteId", "RouteName");
+
+            return View(_vm);
         }
 
         // POST: MapPoints/Create

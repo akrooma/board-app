@@ -37,11 +37,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             RouteAndCharacteristic routeAndCharacteristic = _uow.RouteAndCharacteristics.GetById(id);
+
             if (routeAndCharacteristic == null)
             {
                 return HttpNotFound();
             }
+
             return View(routeAndCharacteristic);
         }
 

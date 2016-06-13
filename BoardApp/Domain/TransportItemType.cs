@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
+    // for example: longboard, bicycle, car
     public class TransportItemType
     {
         public int TransportItemTypeId { get; set; }

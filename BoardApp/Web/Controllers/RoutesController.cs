@@ -4,12 +4,14 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using DAL.Repositories;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -31,16 +33,24 @@ namespace Web.Controllers
         // GET: Routes/Details/5
         public ActionResult Details(int? id)
         {
+            var _vm = new RouteDetailsViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Route route = _uow.Routes.GetById(id);
-            if (route == null)
+
+            _vm.Route = _uow.Routes.GetById(id);
+
+            if (_vm.Route == null)
             {
                 return HttpNotFound();
             }
-            return View(route);
+
+            _vm.Comments = _uow.RouteComments.GetAllCommentsForRoute((int) id);
+            _vm.Characteristics = _uow.RouteAndCharacteristics.GetCharacteristicsForRoute((int) id);
+
+            return View(_vm);
         }
 
         // GET: Routes/Create
@@ -54,16 +64,29 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RouteId,RouteName,RouteDescription,RouteRating,CreatorId")] Route route)
+        public ActionResult Create(RouteCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.Routes.Add(route);
+                _uow.Routes.Add(vm.Route);
+
+                foreach (var characteristic in vm.Characteristics)
+                {
+                    var routeAndCharacteristic = new RouteAndCharacteristic
+                    {
+                        RouteId = vm.Route.RouteId,
+                        RouteCharacteristicId = characteristic.RouteCharacteristicId
+                    };
+
+                    _uow.RouteAndCharacteristics.Add(routeAndCharacteristic);
+                }
+
                 _uow.Commit();
+
                 return RedirectToAction("Index");
             }
 
-            return View(route);
+            return View(vm);
         }
 
         // GET: Routes/Edit/5
@@ -73,11 +96,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Route route = _uow.Routes.GetById(id);
+
             if (route == null)
             {
                 return HttpNotFound();
             }
+
             return View(route);
         }
 
@@ -104,11 +130,14 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Route route = _uow.Routes.GetById(id);
+
             if (route == null)
             {
                 return HttpNotFound();
             }
+
             return View(route);
         }
 
@@ -119,6 +148,7 @@ namespace Web.Controllers
         {
             _uow.Routes.Delete(id);
             _uow.Commit();
+
             return RedirectToAction("Index");
         }
 

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
+    // different values a transport item type's attribute has.
+    // for example a longboard's ridingstyle has these values: cruising, downhill, freestyle, 
     public class TransportItemTypeAttributeValue
     {
         public int TransportItemTypeAttributeValueId { get; set; }

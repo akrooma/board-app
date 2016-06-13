@@ -12,7 +12,7 @@ using Domain;
 
 namespace Web.Controllers
 {
-    public class EventsController : Controller
+    public class EventsController : BaseController
     {
         //private DataBaseContext db = new DataBaseContext();
         private IUOW _uow;

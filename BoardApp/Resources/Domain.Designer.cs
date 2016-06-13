@@ -72,7 +72,7 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Headline.
         /// </summary>
-        public static string ArticleHeadline {
+        internal static string ArticleHeadline {
             get {
                 return ResourceManager.GetString("ArticleHeadline", resourceCulture);
             }
@@ -93,6 +93,15 @@ namespace Resources {
         public static string FirstLastName {
             get {
                 return ResourceManager.GetString("FirstLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
             }
         }
         

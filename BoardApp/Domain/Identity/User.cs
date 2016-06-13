@@ -46,9 +46,8 @@ namespace Domain.Identity
             return userIdentity;
         }
 
-
         //Additional (custom) properties
-        //public virtual List<Person> Persons { get; set; }
+        //todo transportitem, comments etc
 
     }
 

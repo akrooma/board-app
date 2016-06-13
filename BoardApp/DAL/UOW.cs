@@ -37,10 +37,6 @@ namespace DAL
         public IEFRepository<Route> Routes => GetStandardRepo<Route>();
         public IEFRepository<RouteCharacteristic> RouteCharacteristics => GetStandardRepo<RouteCharacteristic>();
 
-        public IEFRepository<RouteAndCharacteristic> RouteAndCharacteristics
-            => GetStandardRepo<RouteAndCharacteristic>();
-
-        public IEFRepository<RouteComment> RouteComments => GetStandardRepo<RouteComment>();
         public IEFRepository<RouteInEvent> RouteInEvents => GetStandardRepo<RouteInEvent>();
         public IEFRepository<TransportItem> TransportItems => GetStandardRepo<TransportItem>();
         public IEFRepository<TransportItemType> TransportItemTypes => GetStandardRepo<TransportItemType>();
@@ -50,8 +46,6 @@ namespace DAL
 
         public IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues 
             => GetStandardRepo<TransportItemTypeAttributeValue>();
-        public IEFRepository<MultiLangString> MultiLangStrings => GetStandardRepo<MultiLangString>();
-        public IEFRepository<Translation> Translations => GetStandardRepo<Translation>();
 
         //public IEFRepository<Contact> Contacts => GetStandardRepo<Contact>();
         //public IEFRepository<ContactType> ContactTypes => GetStandardRepo<ContactType>();
@@ -59,8 +53,13 @@ namespace DAL
         // repo with custom methods
         // add it also in EFRepositoryFactories.cs, in method GetCustomFactories
         // public IPersonRepository Persons => GetRepo<IPersonRepository>();
+        public IRouteCommentRepository RouteComments => GetRepo<IRouteCommentRepository>();
+        public IRouteAndCharacteristicRepository RouteAndCharacteristics => GetRepo<IRouteAndCharacteristicRepository>();
+
         public IArticleRepository Articles => GetRepo<IArticleRepository>();
- 
+        public IMultiLangStringRepository MultiLangStrings => GetRepo<IMultiLangStringRepository>();
+        public ITranslationRepository Translations => GetRepo<ITranslationRepository>();
+
         public IUserIntRepository UsersInt => GetRepo<IUserIntRepository>();
         public IUserRoleIntRepository UserRolesInt => GetRepo<IUserRoleIntRepository>();
         public IRoleIntRepository RolesInt => GetRepo<IRoleIntRepository>();

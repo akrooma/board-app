@@ -260,6 +260,8 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\MapPointViewModels.cs" />
+    <Compile Include="ViewModels\RouteViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css" />

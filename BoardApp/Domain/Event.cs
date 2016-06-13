@@ -11,8 +11,10 @@ namespace Domain
     {
         public int EventId { get; set; }
 
-        [MinLength(1)]
-        [MaxLength(50)]
+        [Required(ErrorMessageResourceName = "FieldIsRequired", ErrorMessageResourceType = typeof(Resources.Common))]
+        [MinLength(1, ErrorMessageResourceName = "FieldMinLength", ErrorMessageResourceType = typeof(Resources.Common))]
+        [MaxLength(128, ErrorMessageResourceName = "FieldMaxLength", ErrorMessageResourceType = typeof(Resources.Common))]
+        [Display(Name = nameof(Resources.Domain.FirstName), ResourceType = typeof(Resources.Domain))]
         public string EventName { get; set; }
 
         public DateTime EventCreationDate { get; set; }

@@ -14,5 +14,10 @@ namespace DAL.Repositories
         public RouteCommentRepository(IDbContext dbContext) : base(dbContext)
         {
         }
+
+        public List<RouteComment> GetAllCommentsForRoute(int id)
+        {
+            return this.All.Where(route => route.RouteId == id).ToList();
+        }
     }
 }
