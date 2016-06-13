@@ -261,6 +261,8 @@
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\MapPointViewModels.cs" />
+    <Compile Include="ViewModels\RouteAndCharacteristicViewModel.cs" />
+    <Compile Include="ViewModels\RouteCommentViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1690,6 +1692,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{818f47a0-8000-48f4-b523-78c6636e967d}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HtmlHelpers\HtmlHelpers.csproj">
+      <Project>{6fe01879-e81d-4965-a951-f0197c88c416}</Project>
+      <Name>HtmlHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Identity\Identity.csproj">
       <Project>{2b363023-92b4-411a-a3b5-36947bfd7417}</Project>

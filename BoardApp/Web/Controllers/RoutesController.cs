@@ -70,17 +70,6 @@ namespace Web.Controllers
             {
                 _uow.Routes.Add(vm.Route);
 
-                foreach (var characteristic in vm.Characteristics)
-                {
-                    var routeAndCharacteristic = new RouteAndCharacteristic
-                    {
-                        RouteId = vm.Route.RouteId,
-                        RouteCharacteristicId = characteristic.RouteCharacteristicId
-                    };
-
-                    _uow.RouteAndCharacteristics.Add(routeAndCharacteristic);
-                }
-
                 _uow.Commit();
 
                 return RedirectToAction("Index");

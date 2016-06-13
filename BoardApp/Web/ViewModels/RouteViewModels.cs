@@ -10,8 +10,8 @@ namespace Web.ViewModels
     public class RouteCreateViewModel
     {
         public Route Route { get; set; }
-        public List<RouteCharacteristic> Characteristics { get; set; }
-        public SelectList RouteCharacteristicSelectList { get; set; }
+        public int[] CharacteristicIds { get; set; }
+        public MultiSelectList RouteCharacteristicSelectList { get; set; }
     }
 
     public class RouteDetailsViewModel
