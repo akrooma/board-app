@@ -20,7 +20,6 @@ namespace Domain
         [MaxLength(300)]
         public string TransportItemTypeAttributeDescription { get; set; }
 
-
         public int TransportItemTypeId { get; set; }
         public virtual TransportItemType TransportItemType { get; set; }
 

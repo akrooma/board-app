@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using Domain;
+using Microsoft.AspNet.Identity;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -26,7 +28,8 @@ namespace Web.Controllers
         // GET: TransportItems
         public ActionResult Index()
         {
-            var transportItems = _uow.TransportItems.GetAllIncluding(t => t.TransportItemType);
+            var transportItems = _uow.TransportItems.GetAllIncluding(t => t.TransportItemType).
+				Where(t => t.OwnerId == User.Identity.GetUserId<int>());
             return View(transportItems.ToList());
         }
 
@@ -37,19 +40,25 @@ namespace Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             TransportItem transportItem = _uow.TransportItems.GetById(id);
+
             if (transportItem == null)
             {
                 return HttpNotFound();
             }
+
             return View(transportItem);
         }
 
         // GET: TransportItems/Create
         public ActionResult Create()
         {
-            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name");
-            return View();
+			var _vm = new TransportItemCreateViewModel() {
+				TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name")
+			};
+
+            return View(_vm);
         }
 
         // POST: TransportItems/Create
@@ -57,38 +66,43 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TransportItemId,Name,Description,TransportItemTypeId")] TransportItem transportItem)
+        public ActionResult Create(TransportItemCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.TransportItems.Add(transportItem);
+				vm.TransportItem.OwnerId = User.Identity.GetUserId<int>();
+
+				_uow.TransportItems.Add(vm.TransportItem);
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
-            return View(transportItem);
+			vm.TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", vm.TransportItem.TransportItemTypeId);
+
+            return View(vm);
         }
 
         // GET: TransportItems/Edit/5
         public ActionResult Edit(int? id)
         {
+			var vm = new TransportItemEditViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TransportItem transportItem = _uow.TransportItems.GetById(id);
+            vm.TransportItem = _uow.TransportItems.GetById(id);
 
-            if (transportItem == null)
+            if (vm.TransportItem == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+            vm.TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", vm.TransportItem.TransportItemTypeId);
 
-            return View(transportItem);
+            return View(vm);
         }
 
         // POST: TransportItems/Edit/5
@@ -96,18 +110,18 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TransportItemId,Name,Description,TransportItemTypeId")] TransportItem transportItem)
+        public ActionResult Edit(TransportItemEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.TransportItems.Update(transportItem);
+                _uow.TransportItems.Update(vm.TransportItem);
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeId = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", transportItem.TransportItemTypeId);
+            vm.TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", vm.TransportItem.TransportItemTypeId);
 
-            return View(transportItem);
+            return View(vm);
         }
 
         // GET: TransportItems/Delete/5

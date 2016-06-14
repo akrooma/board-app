@@ -22,6 +22,12 @@ $.when(
 });
 
 $(function () {
+	var navBarHeight = $(".navbar").height();
+	if (navBarHeight > 50) {
+		$(".container.body-content").css("padding-top", navBarHeight - 50);
+	}
+	
+
     // attach bootstrap datetimepicker spinner
     $('input[data-val-datetime]').datetimepicker({ locale: currentCultureCode, format: 'L LT' });
     $('input[data-val-date]').datetimepicker({ locale: currentCultureCode, format: 'L' });

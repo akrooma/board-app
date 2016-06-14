@@ -15,7 +15,7 @@ namespace Domain
 
         [MinLength(1)]
         [MaxLength(100)]
-        public string Name { get; set; }
+        public string Value { get; set; }
 
         [MaxLength(100)]
         public string Description { get; set; }

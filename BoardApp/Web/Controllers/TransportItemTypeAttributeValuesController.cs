@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -50,9 +51,13 @@ namespace Web.Controllers
         // GET: TransportItemTypeAttributeValues/Create
         public ActionResult Create()
         {
-            ViewBag.TransportItemTypeAttributeId = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName");
+			var vm = new TransportItemTypeAttributeValueCreateViewModel
+				{
+					TransportItemTypeAttributeSelectList = new SelectList(
+						_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName")
+				};
 
-            return View();
+            return View(vm);
         }
 
         // POST: TransportItemTypeAttributeValues/Create
@@ -60,39 +65,41 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TransportItemTypeAttributeValueId,Name,Description,TransportItemTypeAttributeId")] TransportItemTypeAttributeValue transportItemTypeAttributeValue)
+        public ActionResult Create(TransportItemTypeAttributeValueCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.TransportItemTypeAttributeValues.Add(transportItemTypeAttributeValue);
+                _uow.TransportItemTypeAttributeValues.Add(vm.TransportItemTypeAttributeValue);
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeAttributeId = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", transportItemTypeAttributeValue.TransportItemTypeAttributeId);
+            vm.TransportItemTypeAttributeSelectList= new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", vm.TransportItemTypeAttributeValue.TransportItemTypeAttributeId);
 
-            return View(transportItemTypeAttributeValue);
+            return View(vm);
         }
 
         // GET: TransportItemTypeAttributeValues/Edit/5
         public ActionResult Edit(int? id)
         {
+			var vm = new TransportItemTypeAttributeValueEditViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TransportItemTypeAttributeValue transportItemTypeAttributeValue = _uow.TransportItemTypeAttributeValues.GetById(id);
+            vm.TransportItemTypeAttributeValue = _uow.TransportItemTypeAttributeValues.GetById(id);
 
-            if (transportItemTypeAttributeValue == null)
+            if (vm.TransportItemTypeAttributeValue == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.TransportItemTypeAttributeId = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", transportItemTypeAttributeValue.TransportItemTypeAttributeId);
+            vm.TransportItemTypeAttributeSelectList = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", vm.TransportItemTypeAttributeValue.TransportItemTypeAttributeId);
 
-            return View(transportItemTypeAttributeValue);
+            return View(vm);
         }
 
         // POST: TransportItemTypeAttributeValues/Edit/5
@@ -100,20 +107,20 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TransportItemTypeAttributeValueId,Name,Description,TransportItemTypeAttributeId")] TransportItemTypeAttributeValue transportItemTypeAttributeValue)
+        public ActionResult Edit(TransportItemTypeAttributeValueEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.TransportItemTypeAttributeValues.Update(transportItemTypeAttributeValue);
+                _uow.TransportItemTypeAttributeValues.Update(vm.TransportItemTypeAttributeValue);
 
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TransportItemTypeAttributeId = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", transportItemTypeAttributeValue.TransportItemTypeAttributeId);
+            vm.TransportItemTypeAttributeSelectList = new SelectList(_uow.TransportItemTypeAttributes.All, "TransportItemTypeAttributeId", "TransportItemTypeAttributeName", vm.TransportItemTypeAttributeValue.TransportItemTypeAttributeId);
 
-            return View(transportItemTypeAttributeValue);
+            return View(vm);
         }
 
         // GET: TransportItemTypeAttributeValues/Delete/5
@@ -139,7 +146,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _uow.TransportItemTypeAttributeValues.Delete(id);
+	        _uow.TransportItemTypeAttributeValues.Delete(id);
             _uow.Commit();
 
             return RedirectToAction("Index");

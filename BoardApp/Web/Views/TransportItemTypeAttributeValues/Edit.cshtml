@@ -1,4 +1,4 @@
-﻿@model Domain.TransportItemTypeAttributeValue
+﻿@model Web.ViewModels.TransportItemTypeAttributeValueEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -15,29 +15,29 @@
         <h4>TransportItemTypeAttributeValue</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.TransportItemTypeAttributeValueId)
+        @Html.HiddenFor(model => model.TransportItemTypeAttributeValue.TransportItemTypeAttributeValueId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TransportItemTypeAttributeValue.Value, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TransportItemTypeAttributeValue.Value, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TransportItemTypeAttributeValue.Value, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TransportItemTypeAttributeValue.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TransportItemTypeAttributeValue.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TransportItemTypeAttributeValue.Description, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TransportItemTypeAttributeId, "TransportItemTypeAttributeId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TransportItemTypeAttributeValue.TransportItemTypeAttributeId, "TransportItemTypeAttributeId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TransportItemTypeAttributeId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TransportItemTypeAttributeId, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.TransportItemTypeAttributeValue.TransportItemTypeAttributeId, Model.TransportItemTypeAttributeSelectList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TransportItemTypeAttributeValue.TransportItemTypeAttributeId, "", new { @class = "text-danger" })
             </div>
         </div>
 

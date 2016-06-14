@@ -48,7 +48,7 @@ namespace Domain.Identity
 
         //Additional (custom) properties
         //todo transportitem, comments etc
-
+        public virtual List<TransportItem> TransportItems { get; set; } = new List<TransportItem>();
     }
 
 

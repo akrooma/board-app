@@ -265,6 +265,7 @@
     <Compile Include="ViewModels\RouteAndCharacteristicViewModel.cs" />
     <Compile Include="ViewModels\RouteCommentViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModels.cs" />
+    <Compile Include="ViewModels\TransportItemViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -1117,6 +1118,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\App\ganalytics.js" />
+    <Content Include="Scripts\App\jquery.validate.fixdata.js" />
+    <Content Include="Scripts\App\jquery.validate.globalize.datetime.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.1.js" />

@@ -73,6 +73,7 @@
     <Compile Include="RouteInEvent.cs" />
     <Compile Include="Translation.cs" />
     <Compile Include="TransportItem.cs" />
+    <Compile Include="TransportItemAndAttributeValue.cs" />
     <Compile Include="TransportItemType.cs" />
     <Compile Include="TransportItemTypeAttribute.cs" />
     <Compile Include="TransportItemTypeAttributeValue.cs" />

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Resources;
@@ -13,6 +14,7 @@ namespace Web.ViewModels
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+		//public List<TransportItem> TransportItems { get; set; }
     }
 
     public class ManageLoginsViewModel

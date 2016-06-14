@@ -43,8 +43,9 @@ namespace DAL
         public DbSet<TransportItemType> TransportItemTypes { get; set; }
         public DbSet<TransportItemTypeAttribute> TransportItemTypeAttributes { get; set; }
         public DbSet<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues { get; set; }
+        public DbSet<TransportItemAndAttributeValue> TransportItemAndAttributeValues { get; set; }
 
-   
+
         public IDbSet<Article> Articles { get; set; }
         public IDbSet<MultiLangString> MultiLangStrings { get; set; }
         public IDbSet<Translation> Translations { get; set; }

@@ -47,13 +47,16 @@ namespace DAL
         public IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues 
             => GetStandardRepo<TransportItemTypeAttributeValue>();
 
-        //public IEFRepository<Contact> Contacts => GetStandardRepo<Contact>();
-        //public IEFRepository<ContactType> ContactTypes => GetStandardRepo<ContactType>();
+	    public IEFRepository<TransportItemAndAttributeValue> TransportItemAndAttributeValues
+		    => GetStandardRepo<TransportItemAndAttributeValue>();
 
-        // repo with custom methods
-        // add it also in EFRepositoryFactories.cs, in method GetCustomFactories
-        // public IPersonRepository Persons => GetRepo<IPersonRepository>();
-        public IRouteCommentRepository RouteComments => GetRepo<IRouteCommentRepository>();
+		//public IEFRepository<Contact> Contacts => GetStandardRepo<Contact>();
+		//public IEFRepository<ContactType> ContactTypes => GetStandardRepo<ContactType>();
+
+		// repo with custom methods
+		// add it also in EFRepositoryFactories.cs, in method GetCustomFactories
+		// public IPersonRepository Persons => GetRepo<IPersonRepository>();
+		public IRouteCommentRepository RouteComments => GetRepo<IRouteCommentRepository>();
         public IRouteAndCharacteristicRepository RouteAndCharacteristics => GetRepo<IRouteAndCharacteristicRepository>();
 
         public IArticleRepository Articles => GetRepo<IArticleRepository>();

@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using DAL;
+using DAL.Interfaces;
+using Domain;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using NLog;
@@ -61,7 +65,9 @@ namespace Web.Controllers
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await _userManager.GetLoginsAsync(userId),
                 BrowserRemembered =
-                    await _authenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+                    await _authenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+
+				
             };
             return View(model);
         }
