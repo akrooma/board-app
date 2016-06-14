@@ -130,11 +130,14 @@ namespace Web.Controllers
 	            {
 		            foreach (var attributeValueId in vm.SelectedAttributeValueIds)
 		            {
-			            _uow.TransportItemAndAttributeValues.Add(new TransportItemAndAttributeValue
+			            if (_uow.TransportItemAndAttributeValues.CombinationNotExists(vm.TransportItem.TransportItemId, attributeValueId))
 			            {
-				            TransportItemId = vm.TransportItem.TransportItemId,
-							TransportItemTypeAttributeValueId = attributeValueId
-			            });
+							_uow.TransportItemAndAttributeValues.Add(new TransportItemAndAttributeValue
+							{
+								TransportItemId = vm.TransportItem.TransportItemId,
+								TransportItemTypeAttributeValueId = attributeValueId
+							});
+						}
 		            }
 	            }
 

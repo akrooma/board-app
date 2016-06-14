@@ -31,6 +31,7 @@ namespace DAL.Helpers
         {
             return new Dictionary<Type, Func<IDbContext, object>>
                 {
+					{typeof (ITransportItemAndAttributeValueRepository), dbContext => new TransportItemAndAttributeValueRepository(dbContext) },
 					{typeof (ITransportItemRepository), dbContext => new TransportItemRepository(dbContext) },
 					{typeof (IRouteAndCharacteristicRepository), dbContext => new RouteAndCharacteristicRepository(dbContext) },
                     {typeof (IRouteCommentRepository), dbContext => new RouteCommentRepository(dbContext) },

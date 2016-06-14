@@ -7,7 +7,8 @@ using Domain;
 
 namespace DAL.Interfaces
 {
-    interface ITransportItemAndAttributeValueRepository : IEFRepository<TransportItemAndAttributeValue>
+    public interface ITransportItemAndAttributeValueRepository : IEFRepository<TransportItemAndAttributeValue>
     {
+	    bool CombinationNotExists(int transportItemId, int attributeValueId);
     }
 }
