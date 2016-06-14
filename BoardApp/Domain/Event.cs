@@ -17,8 +17,13 @@ namespace Domain
         [Display(Name = nameof(Resources.Domain.FirstName), ResourceType = typeof(Resources.Domain))]
         public string EventName { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime EventCreationDate { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime EventStartDate { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime EventEndDate { get; set; }
 
         [MaxLength(1000)]

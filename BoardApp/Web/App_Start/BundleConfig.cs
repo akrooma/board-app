@@ -13,6 +13,7 @@ namespace Web
 
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+				"~/Scripts/app/jquery.validate.fixdata.js",
                 "~/bower_components/jquery-validation/dist/jquery.validate.js",
                 "~/Scripts/jquery.validate.unobtrusive.js", // original ms package
                 "~/Scripts/app/jquery.validate.globalize.datetime.js"

@@ -1,4 +1,5 @@
-﻿@model Domain.Event
+﻿@using HtmlHelpers
+@model Web.ViewModels.EventCreateViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -16,42 +17,50 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Event.EventName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Event.EventName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventCreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event.EventCreationDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventCreationDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventCreationDate, "", new { @class = "text-danger" })
+                @Html.DateTimeEditorFor(model => model.Event.EventCreationDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Event.EventCreationDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event.EventStartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventStartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventStartDate, "", new { @class = "text-danger" })
+                @Html.DateTimeEditorFor(model => model.Event.EventStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Event.EventStartDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event.EventEndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventEndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventEndDate, "", new { @class = "text-danger" })
+                @Html.DateTimeEditorFor(model => model.Event.EventEndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Event.EventEndDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Event.EventDescription, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventDescription, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Event.EventDescription, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Event.EventDescription, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PlannedRouteIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(i => Model.PlannedRouteIds, Model.RouteSelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlannedRouteIds, "", new { @class = "text-danger" })
             </div>
         </div>
 

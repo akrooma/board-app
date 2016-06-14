@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DAL;
 using DAL.Interfaces;
 using Domain;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -49,7 +50,12 @@ namespace Web.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            return View();
+            var _vm = new EventCreateViewModel
+            {
+                RouteSelectList = new MultiSelectList(_uow.Routes.All, "RouteId", "RouteName")
+            };
+
+            return View(_vm);
         }
 
         // POST: Events/Create
@@ -57,17 +63,33 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,EventName,EventCreationDate,EventStartDate,EventEndDate,EventDescription")] Event @event)
+        public ActionResult Create(EventCreateViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _uow.Events.Add(@event);
+                _uow.Events.Add(vm.Event);
+
+                if (vm.PlannedRouteIds.Count > 0)
+                {
+                    foreach (var routeId in vm.PlannedRouteIds)
+                    {
+                        _uow.RouteInEvents.Add(
+                            new RouteInEvent
+                            {
+                                EventId = vm.Event.EventId,
+                                RouteId = routeId,
+                                RouteInEventComment = "Placeholder comment"
+                            });
+                    }
+
+                }
+
                 _uow.Commit();
 
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            return View(vm);
         }
 
         // GET: Events/Edit/5
