@@ -13,5 +13,10 @@ namespace DAL.Repositories
         public TransportItemRepository(IDbContext dbContext) : base(dbContext)
         {
         }
+
+	    public TransportItem GetForUser(int transportItemId, int userId)
+	    {
+			return DbSet.FirstOrDefault(t => t.TransportItemId == transportItemId && t.OwnerId == userId);
+	    }
     }
 }

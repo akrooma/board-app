@@ -17,7 +17,7 @@ namespace DAL.Repositories
 
         public List<RouteComment> GetAllCommentsForRoute(int id)
         {
-            return this.All.Where(route => route.RouteId == id).ToList();
+            return DbSet.Where(route => route.RouteId == id).ToList();
         }
     }
 }

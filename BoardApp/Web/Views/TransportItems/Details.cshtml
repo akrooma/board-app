@@ -1,4 +1,4 @@
-﻿@model Domain.TransportItem
+﻿@model Web.ViewModels.TransportItemDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,32 +11,43 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TransportItemType.Name)
+            @Html.DisplayNameFor(model => model.TransportItem.TransportItemType.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TransportItemType.Name)
+            @Html.DisplayFor(model => model.TransportItem.TransportItemType.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.TransportItem.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.TransportItem.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.TransportItem.Description)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+	    <dd>
+		    @Html.DisplayFor(model => model.TransportItem.Description)
+	    </dd>
+
+	    <dt>
+		    @Html.DisplayNameFor(model => model.AttributeValues)
+	    </dt>
+
+		@foreach (var attributeValue in Model.AttributeValues)
+		{
+			<dd>
+				@Html.DisplayFor(x => attributeValue.TransportItemTypeAttributeValue.Value)
+			</dd>
+		}
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TransportItemId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TransportItem.TransportItemId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

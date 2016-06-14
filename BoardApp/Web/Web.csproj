@@ -262,9 +262,11 @@
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\MapPointViewModels.cs" />
-    <Compile Include="ViewModels\RouteAndCharacteristicViewModel.cs" />
-    <Compile Include="ViewModels\RouteCommentViewModel.cs" />
+    <Compile Include="ViewModels\RouteAndCharacteristicViewModels.cs" />
+    <Compile Include="ViewModels\RouteCommentViewModels.cs" />
     <Compile Include="ViewModels\RouteViewModels.cs" />
+    <Compile Include="ViewModels\TransportItemTypeAttributeValueViewModels.cs" />
+    <Compile Include="ViewModels\TransportItemTypeAttributeViewModels.cs" />
     <Compile Include="ViewModels\TransportItemViewModels.cs" />
   </ItemGroup>
   <ItemGroup>

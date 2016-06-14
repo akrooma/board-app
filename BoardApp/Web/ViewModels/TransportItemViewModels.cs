@@ -15,6 +15,14 @@ namespace Web.ViewModels
 
 	public class TransportItemEditViewModel : TransportItemCreateViewModel
 	{
-		
+		public MultiSelectList TransportItemTypeAttributes { get; set; }
+		public MultiSelectList TransportItemTypeAttributeValues { get; set; }
+		public List<int> SelectedAttributeValueIds { get; set; }
+	}
+
+	public class TransportItemDetailsViewModel
+	{
+		public TransportItem TransportItem { get; set; }
+		public List<TransportItemAndAttributeValue> AttributeValues { get; set; }
 	}
 }

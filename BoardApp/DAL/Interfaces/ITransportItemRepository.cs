@@ -9,5 +9,6 @@ namespace DAL.Interfaces
 {
     public interface ITransportItemRepository : IEFRepository<TransportItem>
     {
+	    TransportItem GetForUser(int transportItemId, int userId);
     }
 }

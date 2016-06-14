@@ -14,6 +14,6 @@ namespace Domain
 		public virtual TransportItem TransportItem { get; set; }
 		
 		public int TransportItemTypeAttributeValueId { get; set; }
-		public virtual TransportItemAndAttributeValue TransportItemAttributeValue { get; set; }
+		public virtual TransportItemTypeAttributeValue TransportItemTypeAttributeValue { get; set; }
 	}
 }

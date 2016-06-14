@@ -36,19 +36,23 @@ namespace Web.Controllers
         // GET: TransportItems/Details/5
         public ActionResult Details(int? id)
         {
+			var vm = new TransportItemDetailsViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            TransportItem transportItem = _uow.TransportItems.GetById(id);
+            vm.TransportItem = _uow.TransportItems.GetById(id);
 
-            if (transportItem == null)
+            if (vm.TransportItem == null)
             {
                 return HttpNotFound();
             }
 
-            return View(transportItem);
+	        vm.AttributeValues = _uow.TransportItemAndAttributeValues.All.Where(r => r.TransportItemId == vm.TransportItem.TransportItemId).ToList();
+
+            return View(vm);
         }
 
         // GET: TransportItems/Create
@@ -93,7 +97,7 @@ namespace Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            vm.TransportItem = _uow.TransportItems.GetById(id);
+            vm.TransportItem = _uow.TransportItems.GetForUser((int) id, User.Identity.GetUserId<int>());
 
             if (vm.TransportItem == null)
             {
@@ -101,6 +105,10 @@ namespace Web.Controllers
             }
 
             vm.TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", vm.TransportItem.TransportItemTypeId);
+			vm.TransportItemTypeAttributeValues = 
+				new MultiSelectList(_uow.TransportItemTypeAttributeValues.All.
+				Where(t => t.TransportItemTypeAttribute.TransportItemTypeId == vm.TransportItem.TransportItemTypeId), 
+				"TransportItemTypeAttributeValueId", "Value");
 
             return View(vm);
         }
@@ -114,7 +122,23 @@ namespace Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _uow.TransportItems.Update(vm.TransportItem);
+	            vm.TransportItem.OwnerId = User.Identity.GetUserId<int>();
+
+				_uow.TransportItems.Update(vm.TransportItem);
+
+	            if (vm.SelectedAttributeValueIds.Count > 0 || vm.SelectedAttributeValueIds != null)
+	            {
+		            foreach (var attributeValueId in vm.SelectedAttributeValueIds)
+		            {
+			            _uow.TransportItemAndAttributeValues.Add(new TransportItemAndAttributeValue
+			            {
+				            TransportItemId = vm.TransportItem.TransportItemId,
+							TransportItemTypeAttributeValueId = attributeValueId
+			            });
+		            }
+	            }
+
+				_uow.Commit();
 
                 return RedirectToAction("Index");
             }

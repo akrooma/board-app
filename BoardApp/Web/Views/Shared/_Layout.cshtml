@@ -45,14 +45,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Routes", "Index", "Routes")</li>
-                    <li>@Html.ActionLink("Events", "Index", "Events")</li>
+	                <li>@Html.ActionLink("Events", "Index", "Events")</li>
+
+					@if (Request.IsAuthenticated)
+					{
+						<li>@Html.ActionLink("Transport items", "Index", "TransportItems")</li>
+						<li>@Html.ActionLink("Route comments", "Index", "RouteComments")</li>
+					}
 
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Route characteristics", "Index", "RouteCharacteristics")</li>
-                        <li>@Html.ActionLink("Route comments", "Index", "RouteComments")</li>
                         <li>@Html.ActionLink("Transport item types", "Index", "TransportItemTypes")</li>
                         <li>@Html.ActionLink("Type attributes", "Index", "TransportItemTypeAttributes")</li>
                         <li>@Html.ActionLink("Attribute values", "Index", "TransportItemTypeAttributeValues")</li>

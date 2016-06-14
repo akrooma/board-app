@@ -73,7 +73,7 @@ namespace Web.Controllers
             {
                 _uow.Routes.Add(vm.Route);
 
-                if (vm.CharacteristicIds.Count > 0)
+                if (vm.CharacteristicIds.Count > 0 || vm.CharacteristicIds != null)
                 {
                     foreach (var routeCharacteristicId in vm.CharacteristicIds)
                     {

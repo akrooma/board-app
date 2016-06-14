@@ -23,7 +23,6 @@ namespace DAL.Interfaces
         IEFRepository<RouteCharacteristic> RouteCharacteristics { get; }
         
         IEFRepository<RouteInEvent> RouteInEvents { get; }
-        IEFRepository<TransportItem> TransportItems { get; }
         IEFRepository<TransportItemType> TransportItemTypes { get; }
         IEFRepository<TransportItemTypeAttribute> TransportItemTypeAttributes { get; }
         IEFRepository<TransportItemTypeAttributeValue> TransportItemTypeAttributeValues { get; }
@@ -32,8 +31,9 @@ namespace DAL.Interfaces
 			//Customs repos, manually implemented. Repos with custom methos.
 		IRouteCommentRepository RouteComments { get; }
         IRouteAndCharacteristicRepository RouteAndCharacteristics { get; }
+		ITransportItemRepository TransportItems { get; }
 
-        IArticleRepository Articles { get; }
+		IArticleRepository Articles { get; }
         IMultiLangStringRepository MultiLangStrings { get; }
         ITranslationRepository Translations { get; }
 

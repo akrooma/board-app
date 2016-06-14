@@ -38,7 +38,6 @@ namespace DAL
         public IEFRepository<RouteCharacteristic> RouteCharacteristics => GetStandardRepo<RouteCharacteristic>();
 
         public IEFRepository<RouteInEvent> RouteInEvents => GetStandardRepo<RouteInEvent>();
-        public IEFRepository<TransportItem> TransportItems => GetStandardRepo<TransportItem>();
         public IEFRepository<TransportItemType> TransportItemTypes => GetStandardRepo<TransportItemType>();
 
         public IEFRepository<TransportItemTypeAttribute> TransportItemTypeAttributes
@@ -56,6 +55,7 @@ namespace DAL
 		// repo with custom methods
 		// add it also in EFRepositoryFactories.cs, in method GetCustomFactories
 		// public IPersonRepository Persons => GetRepo<IPersonRepository>();
+		public ITransportItemRepository TransportItems => GetRepo<ITransportItemRepository>();
 		public IRouteCommentRepository RouteComments => GetRepo<IRouteCommentRepository>();
         public IRouteAndCharacteristicRepository RouteAndCharacteristics => GetRepo<IRouteAndCharacteristicRepository>();
 
