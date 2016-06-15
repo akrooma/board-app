@@ -235,6 +235,7 @@
     <Compile Include="Controllers\RouteCommentsController.cs" />
     <Compile Include="Controllers\RouteInEventsController.cs" />
     <Compile Include="Controllers\RoutesController.cs" />
+    <Compile Include="Controllers\TransportItemAndAttributeValuesController.cs" />
     <Compile Include="Controllers\TransportItemsController.cs" />
     <Compile Include="Controllers\TransportItemTypeAttributesController.cs" />
     <Compile Include="Controllers\TransportItemTypeAttributeValuesController.cs" />
@@ -1675,6 +1676,11 @@
     <Content Include="Views\TransportItemTypeAttributeValues\Details.cshtml" />
     <Content Include="Views\TransportItemTypeAttributeValues\Edit.cshtml" />
     <Content Include="Views\TransportItemTypeAttributeValues\Index.cshtml" />
+    <Content Include="Views\TransportItemAndAttributeValues\Create.cshtml" />
+    <Content Include="Views\TransportItemAndAttributeValues\Delete.cshtml" />
+    <Content Include="Views\TransportItemAndAttributeValues\Details.cshtml" />
+    <Content Include="Views\TransportItemAndAttributeValues\Edit.cshtml" />
+    <Content Include="Views\TransportItemAndAttributeValues\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -105,12 +105,15 @@ namespace Web.Controllers
             }
 
             vm.TransportItemTypeSelectList = new SelectList(_uow.TransportItemTypes.All, "TransportItemTypeId", "Name", vm.TransportItem.TransportItemTypeId);
+
 			vm.TransportItemTypeAttributeValues = 
 				new MultiSelectList(_uow.TransportItemTypeAttributeValues.All.
 				Where(t => t.TransportItemTypeAttribute.TransportItemTypeId == vm.TransportItem.TransportItemTypeId), 
 				"TransportItemTypeAttributeValueId", "Value");
 
-            return View(vm);
+			vm.AttributeValues = _uow.TransportItemAndAttributeValues.All.Where(r => r.TransportItemId == vm.TransportItem.TransportItemId).ToList();
+
+			return View(vm);
         }
 
         // POST: TransportItems/Edit/5

@@ -1,0 +1,34 @@
+﻿@model Domain.TransportItemAndAttributeValue
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TransportItemAndAttributeValue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TransportItem.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransportItem.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TransportItemTypeAttributeValue.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TransportItemTypeAttributeValue.Value)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TransportItemAndAttributeValueId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
